@@ -1,4 +1,4 @@
-'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 22 November 2012 at 2:53:36 pm'!
+'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 25 November 2012 at 9:58:21 am'!
 'Description Please enter a description for this package '!
 !classDefinition: #SDAbstractStore category: #'SandstoneDb-Core'!
 Object subclass: #SDAbstractStore
@@ -362,8 +362,21 @@ sandstoneMarkReferences	"Replaces the receiver (sub) active records 	with Sand
 !SDActiveRecord methodsFor: 'serialization' stamp: 'rjl 10/31/2009 15:19'!
 sandstoneResolveReferences	"Replaces the receiver markers with	active records where it is needed"	^ self sandstoneResolveReferencesVisits: self class defaultIdentityDictionary! !
 
-!SDActiveRecord methodsFor: 'actions' stamp: 'rjl 8/15/2008 01:34'!
-save	"I'm using monitors for locking so this can be wrapped in larger critical	in your application code if you want more scope on the critical'"	| isFirstSave |	^ self critical: 		[ self validate.		(isFirstSave := isNew) ifTrue: [ self onBeforeFirstSave ].		self onBeforeSave.		isFirstSave 			ifTrue: [Store storeObject: self] 			ifFalse: [Store updateObject: self].		isFirstSave ifTrue: [ self onAfterFirstSave ].		self onAfterSave.		self ]! !
+!SDActiveRecord methodsFor: 'actions' stamp: 'gsa 11/24/2012 15:00'!
+save
+	"I'm using monitors for locking so this can be wrapped in larger critical
+	in your application code if you want more scope on the critical'"
+	| isFirstSave |
+	^ self critical: 
+		[ self validate.
+		(isFirstSave := isNew) ifTrue: [ self onBeforeFirstSave ].
+		self onBeforeSave.
+		isFirstSave 
+			ifTrue: [Store storeObject: self] 
+			ifFalse: [Store updateObject: self].
+		isFirstSave ifTrue: [ self onAfterFirstSave ].
+		self onAfterSave.
+		self ]! !
 
 !SDActiveRecord methodsFor: 'actions' stamp: 'rjl 8/9/2008 22:32'!
 save: aBlock 	^ self critical: 		[ aBlock value.		self save ]! !
@@ -581,11 +594,28 @@ defaultBaseDirectory	"you can override this if you want to force the db somewhe
 !SDFileStore methodsFor: 'crash recovery' stamp: 'rjl 8/10/2008 01:27'!
 deleteFailedCommitsForClass: aClass 	"all remaining .new files are failed commits, kill them"		[ (self dirForClass: aClass) fullNamesOfAllFilesInSubtree 		select: [ :each | each endsWith: '.new' ]		thenDo: [ :each | FileDirectory deleteFilePath: each ] ] 		on: Error		do: [ :err | Transcript show: err ]! !
 
-!SDFileStore methodsFor: 'queries' stamp: 'rjl 9/18/2008 11:16'!
-dirForClass: aClass 	"compute the path of superclasses all the way up to ActiveRecord, storing 	subclass records as a subdirectory of the superclasses directory 	allows ActiveRecord to deal with inheritance"	| parentClass lineage |	aClass == SDActiveRecord ifTrue: 		[ Error signal: 'ActiveRecord itself is abstract, you must only   store subclasses' ].	lineage := OrderedCollection with: aClass.	parentClass := aClass superclass.	[ parentClass == SDActiveRecord ] whileFalse: 		[ lineage addFirst: parentClass.		parentClass := parentClass superclass ].	^ lineage 		inject: self defaultBaseDirectory		into: [ :dir :each | dir directoryNamed: each name ]! !
+!SDFileStore methodsFor: 'queries' stamp: 'gsa 11/24/2012 15:02'!
+dirForClass: aClass 
+	"compute the path of superclasses all the way up to ActiveRecord, storing 
+	subclass records as a subdirectory of the superclasses directory 
+	allows ActiveRecord to deal with inheritance"
+	| parentClass lineage |
+	aClass == SDActiveRecord ifTrue: 
+		[ Error signal: 'ActiveRecord itself is abstract, you must only  
+ store subclasses' ].
+	lineage := OrderedCollection with: aClass.
+	parentClass := aClass superclass.
+	[ parentClass == SDActiveRecord ] whileFalse: 
+		[ lineage addFirst: parentClass.
+		parentClass := parentClass superclass ].
+	^ lineage 
+		inject: self defaultBaseDirectory
+		into: [ :dir :each | dir directoryNamed: each name ]! !
 
-!SDFileStore methodsFor: 'queries' stamp: 'rjl 8/10/2008 01:27'!
-dirForClass: aClass atId: anId 	"Grab the correct hashed subdirectory for this record"	^ (self dirForClass: aClass) directoryNamed: (self dirNameFor: anId)! !
+!SDFileStore methodsFor: 'queries' stamp: 'gsa 11/24/2012 15:02'!
+dirForClass: aClass atId: anId 
+	"Grab the correct hashed subdirectory for this record"
+	^ (self dirForClass: aClass) directoryNamed: (self dirNameFor: anId)! !
 
 !SDFileStore methodsFor: 'queries' stamp: 'rjl 8/10/2008 00:17'!
 dirNameFor: anId 	"Answers a string with one decimal digit corresponding to anId.  There is a bug	in this that does not ever hash to the directory 1, but because of existing datasets	this must remain, do not want to rehash my databases and it is no big deal"	self flag: #knownBug.	^ (anId inject: 0 into: [ : sum : e | sum + e asInteger ]) asReducedSumOfDigits asString! !

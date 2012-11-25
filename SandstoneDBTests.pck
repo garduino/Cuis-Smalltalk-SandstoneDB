@@ -1,4 +1,4 @@
-'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 22 November 2012 at 2:54:24 pm'!
+'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 25 November 2012 at 9:58:24 am'!
 'Description Please enter a description for this package '!
 !classDefinition: #SDActiveRecordTests category: #SandstoneDbTests!
 TestCase subclass: #SDActiveRecordTests
@@ -94,11 +94,13 @@ SDGrandChildMock class
 !SDActiveRecordTests commentStamp: 'rjl 12/19/2007 20:41' prior: 0!
 Part of the reason I did this project was to force myself to learn to do more unit testing.  I'm starting to learn to like it.!
 
-!SDActiveRecordTests methodsFor: 'factory' stamp: 'RamonLeon 5/5/2011 12:44'!
-childClass	^ SDChildMock ! !
+!SDActiveRecordTests methodsFor: 'factory' stamp: 'gsa 11/23/2012 17:22'!
+childClass
+	^ SDChildMock ! !
 
-!SDActiveRecordTests methodsFor: 'factory' stamp: 'rjl 8/10/2008 11:05'!
-defaultStore	self subclassResponsibility! !
+!SDActiveRecordTests methodsFor: 'factory' stamp: 'gsa 11/23/2012 17:22'!
+defaultStore
+	self subclassResponsibility! !
 
 !SDActiveRecordTests methodsFor: 'actions' stamp: 'RamonLeon 5/5/2011 12:46'!
 flushAndReload	self personClass		coolDown ;		warmUp! !
@@ -106,11 +108,13 @@ flushAndReload	self personClass		coolDown ;		warmUp! !
 !SDActiveRecordTests methodsFor: 'factory' stamp: 'RamonLeon 5/5/2011 12:45'!
 grandChildClass	^ SDGrandChildMock ! !
 
-!SDActiveRecordTests methodsFor: 'factory' stamp: 'RamonLeon 5/5/2011 12:44'!
-manClass	^ SDManMock ! !
+!SDActiveRecordTests methodsFor: 'factory' stamp: 'gsa 11/23/2012 17:23'!
+manClass
+	^ SDManMock ! !
 
-!SDActiveRecordTests methodsFor: 'factory' stamp: 'RamonLeon 5/5/2011 12:44'!
-personClass	^ SDPersonMock ! !
+!SDActiveRecordTests methodsFor: 'factory' stamp: 'gsa 11/23/2012 17:24'!
+personClass
+	^ SDPersonMock ! !
 
 !SDActiveRecordTests methodsFor: 'running' stamp: 'RamonLeon 5/5/2011 12:46'!
 setUp	store := self defaultStore.	SDActiveRecord setStore: store.	"only want to warm up test models, not anything else that might be in this image"	SDFooObject warmUp.	self personClass withAllSubclasses do: [ :each | each warmUp ].		mom := self personClass testPerson.	kid := self personClass testPerson.! !
@@ -169,8 +173,28 @@ testDictionaryKeys	| dad |	dad := self manClass testPerson save.	kid save.	m
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'rjl 8/12/2008 20:09'!
 testDictionarySerialization	kid save.	mom children: (Dictionary with: #son -> kid).	mom save.	self flushAndReload.	self 		assert: (mom refreshed children at: #son)		equals: kid refreshed! !
 
-!SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/5/2011 12:50'!
-testDictionaryWithArrays	| foo fooCopy |	kid save.	3 timesRepeat: [ self manClass new save ].	foo := SDFooObject new		dict: (Dictionary with: kid -> self manClass findAll);		yourself.	fooCopy := foo sandstoneDeepCopy.	self deny: foo == fooCopy.	self deny: fooCopy dict == foo dict.	"Works fine before saving the object"	foo dict keysAndValuesDo: 		[ :key :value | 		self assert: (key isKindOf: self personClass).		value do: [ :each | self assert: (each isKindOf: self manClass) ] ].	fooCopy sandstoneMarkReferences.	"should still work, otherwise save is somehow modifying original object instead of deepCopy of it"	foo dict keysAndValuesDo: 		[ :key :value | 		self assert: (key isKindOf: self personClass).		value do: [ :each | self assert: (each isKindOf: self manClass) ] ]! !
+!SDActiveRecordTests methodsFor: 'testing' stamp: 'gsa 11/23/2012 16:59'!
+testDictionaryWithArrays
+	| foo fooCopy |
+	kid save.
+	3 timesRepeat: [ self manClass new save ].
+	foo := SDFooObject new
+		dict: (Dictionary with: kid -> self manClass findAll);
+		yourself.
+	fooCopy := foo sandstoneDeepCopy.
+	self deny: foo == fooCopy.
+	self deny: fooCopy dict == foo dict.
+	"Works fine before saving the object"
+	foo dict keysAndValuesDo: 
+		[ :key :value | 
+		self assert: (key isKindOf: self personClass).
+		value do: [ :each | self assert: (each isKindOf: self manClass) ] ].
+	fooCopy sandstoneMarkReferences.
+	"should still work, otherwise save is somehow modifying original object instead of deepCopy of it"
+	foo dict keysAndValuesDo: 
+		[ :key :value | 
+		self assert: (key isKindOf: self personClass).
+		value do: [ :each | self assert: (each isKindOf: self manClass) ] ]! !
 
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/5/2011 13:08'!
 testDo	kid save.	self flushAndReload.	self assert: 1 equals: self personClass findAll size.	self personClass do: [ :e | self assert: e = kid ]! !
@@ -184,8 +208,34 @@ testFind	kid save.	self flushAndReload.	self deny: (self personClass find: [ 
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/5/2011 12:47'!
 testFindAll	kid save.	self flushAndReload.	self assert: (self personClass findAll class = Array).	self assert: (self personClass findAll: [ :each | each id = 'not' ]) class = Array! !
 
-!SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/5/2011 12:51'!
-testFindAllSubclasses	| man woman child grandchild |	man := self manClass testPerson save.	woman := self womanClass testPerson save.	child := self childClass testPerson save.	grandchild := self grandChildClass testPerson save.	mom save.	self 		assert: 5		equals: self personClass findAll size.	self assert: (self personClass findAll contains: [ :e | e class = self manClass ]).	self 		assert: 1		equals: self manClass findAll size.	self 		assert: 3		equals: self womanClass findAll size.	self 		assert: 2		equals: self childClass findAll size.	self 		assert: 1		equals: self grandChildClass findAll size.	man delete.	woman delete.	child delete.	grandchild delete! !
+!SDActiveRecordTests methodsFor: 'testing' stamp: 'gsa 11/23/2012 16:58'!
+testFindAllSubclasses
+	| man woman child grandchild |
+	man := self manClass testPerson save.
+	woman := self womanClass testPerson save.
+	child := self childClass testPerson save.
+	grandchild := self grandChildClass testPerson save.
+	mom save.
+	self 
+		assert: 5
+		equals: self personClass findAll size.
+	self assert: (self personClass findAll contains: [ :e | e class = self manClass ]).
+	self 
+		assert: 1
+		equals: self manClass findAll size.
+	self 
+		assert: 3
+		equals: self womanClass findAll size.
+	self 
+		assert: 2
+		equals: self childClass findAll size.
+	self 
+		assert: 1
+		equals: self grandChildClass findAll size.
+	man delete.
+	woman delete.
+	child delete.
+	grandchild delete! !
 
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/5/2011 12:47'!
 testFindById	kid save.	self deny: (self personClass atId: kid id) isNil! !
@@ -265,23 +315,64 @@ testUpdatedOn	kid save.	self assert: kid updatedOn <= DateAndTime now! !
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'rjl 7/14/2008 23:26'!
 testVersion	self assert: kid version equals: 0.	kid save.	self assert: kid version equals: 1.	kid save.	self assert: kid version equals: 2! !
 
-!SDActiveRecordTests methodsFor: 'factory' stamp: 'RamonLeon 5/5/2011 12:44'!
-womanClass	^ SDWomanMock ! !
+!SDActiveRecordTests methodsFor: 'factory' stamp: 'gsa 11/23/2012 17:24'!
+womanClass
+	^ SDWomanMock ! !
 
-!SDActiveRecordTests class methodsFor: 'testing' stamp: 'rjl 8/10/2008 11:05'!
+!SDActiveRecordTests class methodsFor: 'testing' stamp: 'gsa 11/23/2012 12:42'!
 isAbstract	^ true! !
 
-!SDFileStoreTests methodsFor: 'defaults' stamp: 'rjl 8/10/2008 11:05'!
-defaultStore	^ SDFileStore new! !
+!SDFileStoreTests methodsFor: 'defaults' stamp: 'gsa 11/23/2012 12:50'!
+defaultStore
+	^ SDFileStore new! !
 
-!SDFileStoreTests methodsFor: 'running' stamp: 'rjl 8/10/2008 11:27'!
-testDeleteFailedCommits	kid save.	(store 		dirForClass: kid class		atId: kid id) 		copyFileNamed: kid id , '.obj'		toFileNamed: kid id , '.obj.new'.	self assert: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj').	self assert: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj.new').	store deleteFailedCommitsForClass: kid class.	self assert: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj').	self deny: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj.new')! !
+!SDFileStoreTests methodsFor: 'running' stamp: 'gsa 11/24/2012 14:40'!
+testDeleteFailedCommits
+	kid save.
+	(store 
+		dirForClass: kid class
+		atId: kid id) 
+		copyFileNamed: kid id , '.obj'
+		toFileNamed: kid id , '.obj.new'.
+	self assert: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj').
+	self assert: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj.new').
+	store deleteFailedCommitsForClass: kid class.
+	self assert: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj').
+	self deny: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj.new')! !
 
 !SDFileStoreTests methodsFor: 'running' stamp: 'rjl 8/10/2008 11:27'!
 testDeleteOldVersions	| id |	kid save.	kid save.	id := kid id.	kid delete.	self assert: ((store 			dirForClass: kid class			atId: id) fileNamesMatching: id , '.*') isEmpty! !
 
-!SDFileStoreTests methodsFor: 'running' stamp: 'rjl 8/10/2008 11:27'!
-testFinishPartialCommits	kid save.	(store 		dirForClass: kid class		atId: kid id) 		rename: kid id , '.obj'		toBe: kid id , '.obj.new'.	self deny: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj').	self assert: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj.new').	store finishPartialCommitsForClass: kid class.	self assert: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj').	self deny: ((store 			dirForClass: kid class			atId: kid id) fileExists: kid id , '.obj.new')! !
+!SDFileStoreTests methodsFor: 'running' stamp: 'gsa 11/24/2012 14:54'!
+testFinishPartialCommits
+	self halt.
+	kid save.
+	(store 
+		dirForClass: kid class
+		atId: kid id) 
+		rename: kid id , '.obj'
+		toBe: kid id , '.obj.new'.
+	self deny: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj').
+	self assert: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj.new').
+	store finishPartialCommitsForClass: kid class.
+	self assert: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj').
+	self deny: ((store 
+			dirForClass: kid class
+			atId: kid id) fileExists: kid id , '.obj.new')! !
 
 !SDFileStoreTests methodsFor: 'running' stamp: 'rjl 8/14/2008 20:50'!
 testLoadMissingFile	kid save.	(store 		dirForClass: kid class		atId: kid id) deleteFileNamed: kid id , '.obj'.	self 		should: 			[ store 				loadClass: kid class				atId: kid id ]		raise: SDLoadError! !
