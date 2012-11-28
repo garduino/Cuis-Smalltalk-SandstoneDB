@@ -1,4 +1,4 @@
-'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 25 November 2012 at 9:58:24 am'!
+'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 28 November 2012 at 6:41:34 pm'!
 'Description Please enter a description for this package '!
 !classDefinition: #SDActiveRecordTests category: #SandstoneDbTests!
 TestCase subclass: #SDActiveRecordTests
@@ -282,8 +282,8 @@ testMarkReferencesRecursiveDeeperNotTouchedInOrig	| otherKid |	kid buddy: #not
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/5/2011 12:51'!
 testMarkReferencesStops	| other |	other := self manClass testPerson save.	mom father: other.	kid buddy: #some -> (#time -> mom).	mom save.	kid sandstoneMarkReferences.	self assert: (mom father == other)! !
 
-!SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/6/2011 14:37'!
-testMatrixSerialization	| man woman |	man := self manClass testPerson save.	woman := self womanClass testPerson save.	kid save.	mom children: (Matrix rows: 4 columns: 4).	mom children at: 1 at: 1 put: kid.	mom children at: 2 at: 1 put: man.	mom children at: 1 at: 2 put: woman.	mom save.	self flushAndReload.	self assert: (mom refreshed children at: 1 at: 1) equals: kid refreshed.	self assert: (mom refreshed children at: 2 at: 1) equals: man refreshed.	self assert: (mom refreshed children at: 1 at: 2) equals: woman refreshed! !
+!SDActiveRecordTests methodsFor: 'testing' stamp: 'gsa 11/27/2012 18:38'!
+testMatrixSerialization	| man woman |	man := self manClass testPerson save.	woman := self womanClass testPerson save.	kid save.	mom children: (MatrixPharo14CLayer rows: 4 columns: 4).	mom children at: 1 at: 1 put: kid.	mom children at: 2 at: 1 put: man.	mom children at: 1 at: 2 put: woman.	mom save.	self flushAndReload.	self assert: (mom refreshed children at: 1 at: 1) equals: kid refreshed.	self assert: (mom refreshed children at: 2 at: 1) equals: man refreshed.	self assert: (mom refreshed children at: 1 at: 2) equals: woman refreshed! !
 
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'rjl 8/14/2008 14:24'!
 testPeerIdentity	mom save.	kid mother: mom.	kid save.	self flushAndReload.	self assert: kid refreshed mother = mom refreshed! !
@@ -351,9 +351,8 @@ testDeleteFailedCommits
 !SDFileStoreTests methodsFor: 'running' stamp: 'rjl 8/10/2008 11:27'!
 testDeleteOldVersions	| id |	kid save.	kid save.	id := kid id.	kid delete.	self assert: ((store 			dirForClass: kid class			atId: id) fileNamesMatching: id , '.*') isEmpty! !
 
-!SDFileStoreTests methodsFor: 'running' stamp: 'gsa 11/24/2012 14:54'!
+!SDFileStoreTests methodsFor: 'running' stamp: 'gsa 11/27/2012 18:39'!
 testFinishPartialCommits
-	self halt.
 	kid save.
 	(store 
 		dirForClass: kid class
