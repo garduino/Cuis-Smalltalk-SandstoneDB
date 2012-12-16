@@ -1,4 +1,4 @@
-'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 28 November 2012 at 6:41:34 pm'!
+'From Cuis 4.1 of 12 December 2012 [latest update: #1511] on 16 December 2012 at 7:49:41 pm'!
 'Description Please enter a description for this package '!
 !classDefinition: #SDActiveRecordTests category: #SandstoneDbTests!
 TestCase subclass: #SDActiveRecordTests
@@ -102,8 +102,11 @@ childClass
 defaultStore
 	self subclassResponsibility! !
 
-!SDActiveRecordTests methodsFor: 'actions' stamp: 'RamonLeon 5/5/2011 12:46'!
-flushAndReload	self personClass		coolDown ;		warmUp! !
+!SDActiveRecordTests methodsFor: 'actions' stamp: 'gsa 12/16/2012 19:00'!
+flushAndReload
+	self personClass
+		coolDown ;
+		warmUp! !
 
 !SDActiveRecordTests methodsFor: 'factory' stamp: 'RamonLeon 5/5/2011 12:45'!
 grandChildClass	^ SDGrandChildMock ! !
@@ -116,11 +119,26 @@ manClass
 personClass
 	^ SDPersonMock ! !
 
-!SDActiveRecordTests methodsFor: 'running' stamp: 'RamonLeon 5/5/2011 12:46'!
-setUp	store := self defaultStore.	SDActiveRecord setStore: store.	"only want to warm up test models, not anything else that might be in this image"	SDFooObject warmUp.	self personClass withAllSubclasses do: [ :each | each warmUp ].		mom := self personClass testPerson.	kid := self personClass testPerson.! !
+!SDActiveRecordTests methodsFor: 'running' stamp: 'gsa 12/16/2012 19:09'!
+setUp
+	store := self defaultStore.
+	SDActiveRecord setStore: store.
+	"only want to warm up test models, not anything else that might be in this image"
+	SDFooObject warmUp.
+	self personClass withAllSubclasses do: [ :each | each warmUp ].
+	
+	
+	mom := self personClass testPerson.
+	kid := self personClass testPerson.
+! !
 
-!SDActiveRecordTests methodsFor: 'running' stamp: 'RamonLeon 5/5/2011 12:46'!
-tearDown	self personClass do: [ :each | [each delete] on: Error do: [] ].	self personClass coolDown.	SDFooObject do: [:each | [each delete] on: Error do: [] ].	self personClass allSubclassesDo: [ :each | each coolDown ].	Smalltalk garbageCollectMost ! !
+!SDActiveRecordTests methodsFor: 'running' stamp: 'gsa 12/16/2012 18:49'!
+tearDown
+	self personClass do: [ :each | [each delete] on: Error do: [] ].
+	self personClass coolDown.
+	SDFooObject do: [:each | [each delete] on: Error do: [] ].
+	self personClass allSubclassesDo: [ :each | each coolDown ].
+	Smalltalk garbageCollectMost ! !
 
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'rjl 4/21/2008 16:04'!
 testAbort	kid name: 'Joe'.	kid save.	kid name: 'Mary'.	self assert: kid name = 'Mary'.	kid abortChanges.	self assert: kid name = 'Joe'! !
@@ -208,14 +226,16 @@ testFind	kid save.	self flushAndReload.	self deny: (self personClass find: [ 
 !SDActiveRecordTests methodsFor: 'testing' stamp: 'RamonLeon 5/5/2011 12:47'!
 testFindAll	kid save.	self flushAndReload.	self assert: (self personClass findAll class = Array).	self assert: (self personClass findAll: [ :each | each id = 'not' ]) class = Array! !
 
-!SDActiveRecordTests methodsFor: 'testing' stamp: 'gsa 11/23/2012 16:58'!
+!SDActiveRecordTests methodsFor: 'testing' stamp: 'gsa 12/16/2012 19:49'!
 testFindAllSubclasses
-	| man woman child grandchild |
+	| man woman child grandchild |	
 	man := self manClass testPerson save.
 	woman := self womanClass testPerson save.
 	child := self childClass testPerson save.
 	grandchild := self grandChildClass testPerson save.
+
 	mom save.
+
 	self 
 		assert: 5
 		equals: self personClass findAll size.
@@ -232,6 +252,7 @@ testFindAllSubclasses
 	self 
 		assert: 1
 		equals: self grandChildClass findAll size.
+		
 	man delete.
 	woman delete.
 	child delete.
@@ -319,8 +340,9 @@ testVersion	self assert: kid version equals: 0.	kid save.	self assert: kid ve
 womanClass
 	^ SDWomanMock ! !
 
-!SDActiveRecordTests class methodsFor: 'testing' stamp: 'gsa 11/23/2012 12:42'!
-isAbstract	^ true! !
+!SDActiveRecordTests class methodsFor: 'testing' stamp: 'gsa 12/16/2012 18:49'!
+isAbstract
+	^ true! !
 
 !SDFileStoreTests methodsFor: 'defaults' stamp: 'gsa 11/23/2012 12:50'!
 defaultStore

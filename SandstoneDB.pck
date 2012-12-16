@@ -1,4 +1,4 @@
-'From Cuis 4.0 of 21 April 2012 [latest update: #1308] on 25 November 2012 at 9:58:21 am'!
+'From Cuis 4.1 of 12 December 2012 [latest update: #1511] on 16 December 2012 at 7:06:09 pm'!
 'Description Please enter a description for this package '!
 !classDefinition: #SDAbstractStore category: #'SandstoneDb-Core'!
 Object subclass: #SDAbstractStore
@@ -134,8 +134,11 @@ SDSmartRefStreamSerializer class
 !SDAbstractStore commentStamp: 'rjl 8/10/2008 11:41' prior: 0!
 I'm an abstract store to define what's necessary to plug in a new method of storing active records.  When records are stored, they are already sliced out of the graph and have markers for any other references placed in them.  The store can serialize however it sees fit, but when loading, before returning the version from the store, it should resolve the references.'!
 
-!SDActiveRecord commentStamp: 'rjl 8/5/2008 09:35' prior: 0!
-I'm the core of a simple object database based upon a mix of several patterns intended for use with *small* Seaside based web applications.  I am not meant to scale to millions of records, just tens of thousands, but for prototyping and small office applications where the number of records are in the thousands and the number of concurrent users can be handled by a single Squeak image.  To use me, simply subclass me and restart your image that's it.  For more information see http://onsmalltalk.com/programming/smalltalk/sandstonedb-simple-activerecord-style-persistence-in-squeak/!
+!SDActiveRecord commentStamp: '<historical>' prior: 0!
+I'm the core of a simple object database based upon a mix of several patterns intended for use with *small* Seaside based web applications.  I am not meant to scale to millions of records, just tens of thousands, but for prototyping and small office applications where the number of records are in the thousands and the number of concurrent users can be handled by a single Squeak image.  To use me, simply subclass me and restart your image that's it.  
+
+For more information see http://onsmalltalk.com/programming/smalltalk/sandstonedb-simple-activerecord-style-persistence-in-squeak/
+!
 
 !SDCheckPointer commentStamp: 'rjl 8/5/2008 09:17' prior: 0!
 I run as a background process to ensure the database is loaded and periodically save the image when enough active records are found to be newer than the image.  This is essentially just like flushing the contents of a transaction log to the main database file.!
@@ -405,11 +408,13 @@ coolDown	lock := nil.	self ensureReady! !
 !SDActiveRecord class methodsFor: 'defaults' stamp: 'rjl 7/14/2009 10:22'!
 defaultHashSize	^ 100! !
 
-!SDActiveRecord class methodsFor: 'defaults' stamp: 'rjl 10/31/2009 15:17'!
-defaultIdentityDictionary 	^ IdentityDictionary new: self defaultHashSize ! !
+!SDActiveRecord class methodsFor: 'defaults' stamp: 'gsa 12/16/2012 18:55'!
+defaultIdentityDictionary 
+	^ IdentityDictionary new: self defaultHashSize ! !
 
-!SDActiveRecord class methodsFor: 'defaults' stamp: 'rjl 8/9/2008 23:40'!
-defaultStore	^ SDFileStore new! !
+!SDActiveRecord class methodsFor: 'defaults' stamp: 'gsa 12/16/2012 18:54'!
+defaultStore
+	^ SDFileStore new! !
 
 !SDActiveRecord class methodsFor: 'queries smalltalk style' stamp: 'RamonLeon 5/14/2011 15:31'!
 detect: aBlock	^ self find: aBlock ! !
@@ -438,8 +443,12 @@ findAll	^ (Store forClass: self) values! !
 !SDActiveRecord class methodsFor: 'queries' stamp: 'rjl 6/13/2009 17:27'!
 findAll: aBlock 	^ ( Store forClass: self findAll: aBlock ) values! !
 
-!SDActiveRecord class methodsFor: 'initialization' stamp: 'RamonLeon 4/30/2011 18:09'!
-initialize	"self initialize"		Store := self defaultStore.! !
+!SDActiveRecord class methodsFor: 'initialization' stamp: 'gsa 12/16/2012 18:53'!
+initialize
+	"self initialize"
+	
+	Store := self defaultStore.
+! !
 
 !SDActiveRecord class methodsFor: 'queries private' stamp: 'RamonLeon 5/6/2011 08:13'!
 lock	^ lock ifNil: [ lock := Monitor new ]! !
@@ -450,8 +459,10 @@ resetStoreForLoad	self setStore: self store class new! !
 !SDActiveRecord class methodsFor: 'queries smalltalk style' stamp: 'RamonLeon 5/14/2011 15:30'!
 select: aBlock	^ self findAll: aBlock ! !
 
-!SDActiveRecord class methodsFor: 'initialization' stamp: 'rjl 8/31/2008 20:59'!
-setStore: aStore 	Store ifNotNil: [ Store ensureDown ].	Store := aStore! !
+!SDActiveRecord class methodsFor: 'initialization' stamp: 'gsa 12/16/2012 18:51'!
+setStore: aStore 
+	Store ifNotNil: [ Store ensureDown ].
+	Store := aStore! !
 
 !SDActiveRecord class methodsFor: 'accessing' stamp: 'rjl 8/14/2008 15:31'!
 store	^ Store! !
@@ -588,11 +599,23 @@ on: aDictionary 	^ self new		dictionary: aDictionary;		yourself! !
 !SDFileStore methodsFor: 'actions' stamp: 'rjl 8/11/2008 19:20'!
 commit: aBlock	self shouldNotImplement! !
 
-!SDFileStore methodsFor: 'defaults' stamp: 'gsa 11/21/2012 15:30'!
-defaultBaseDirectory	"you can override this if you want to force the db somewhere else"	^ FileDirectory default directoryNamed: 		(FileDirectory baseNameFor: 			(FileDirectory localNameFor: 				Smalltalk imageName)) , '.SandstoneDb'! !
+!SDFileStore methodsFor: 'defaults' stamp: 'gsa 12/16/2012 18:59'!
+defaultBaseDirectory
+	"you can override this if you want to force the db somewhere else"
+	^ FileDirectory default directoryNamed: 
+		(FileDirectory baseNameFor: 
+			(FileDirectory localNameFor: 
+				Smalltalk imageName)) , '.SandstoneDb'! !
 
-!SDFileStore methodsFor: 'crash recovery' stamp: 'rjl 8/10/2008 01:27'!
-deleteFailedCommitsForClass: aClass 	"all remaining .new files are failed commits, kill them"		[ (self dirForClass: aClass) fullNamesOfAllFilesInSubtree 		select: [ :each | each endsWith: '.new' ]		thenDo: [ :each | FileDirectory deleteFilePath: each ] ] 		on: Error		do: [ :err | Transcript show: err ]! !
+!SDFileStore methodsFor: 'crash recovery' stamp: 'gsa 12/16/2012 18:59'!
+deleteFailedCommitsForClass: aClass 
+	"all remaining .new files are failed commits, kill them"
+	
+	[ (self dirForClass: aClass) fullNamesOfAllFilesInSubtree 
+		select: [ :each | each endsWith: '.new' ]
+		thenDo: [ :each | FileDirectory deleteFilePath: each ] ] 
+		on: Error
+		do: [ :err | Transcript show: err ]! !
 
 !SDFileStore methodsFor: 'queries' stamp: 'gsa 11/24/2012 15:02'!
 dirForClass: aClass 
@@ -620,8 +643,9 @@ dirForClass: aClass atId: anId
 !SDFileStore methodsFor: 'queries' stamp: 'rjl 8/10/2008 00:17'!
 dirNameFor: anId 	"Answers a string with one decimal digit corresponding to anId.  There is a bug	in this that does not ever hash to the directory 1, but because of existing datasets	this must remain, do not want to rehash my databases and it is no big deal"	self flag: #knownBug.	^ (anId inject: 0 into: [ : sum : e | sum + e asInteger ]) asReducedSumOfDigits asString! !
 
-!SDFileStore methodsFor: 'actions' stamp: 'rjl 9/14/2008 08:38'!
-ensureDown	self initializeCache ! !
+!SDFileStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:57'!
+ensureDown
+	self initializeCache ! !
 
 !SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:07'!
 ensureForClass: aClass 	| dir |	super ensureForClass: aClass.	dir := (self dirForClass: aClass) assureExistence.	0 		to: 9		do: [ :num | (dir directoryNamed: num asString) assureExistence ].! !
@@ -662,17 +686,29 @@ commit: aBlock	self shouldNotImplement! !
 !SDMemoryStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:04'!
 loadClass: aClass atId: anId 	^ (Instances at: anId) sandstoneResolveReferences! !
 
-!SDMemoryStore methodsFor: 'actions' stamp: 'pre 6/12/2012 15:03'!
-recoverForClass: aClass 		"Instances keysDo: [:e | self cachedLoadOfClass: aClass from: e]"	(Instances associationsSelect: [ :a | a value class == aClass ]) 		keysDo: [ :e |  self cachedLoadOfClass: aClass from:  e ]! !
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:58'!
+recoverForClass: aClass 
+	
+	"Instances keysDo: [:e | self cachedLoadOfClass: aClass from: e]"
 
-!SDMemoryStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:08'!
-removeObject: anObject 	super removeObject: anObject.	Instances removeKey: anObject id ifAbsent: []! !
+	(Instances associationsSelect: [ :a | a value class == aClass ]) 
+		keysDo: [ :e |  self cachedLoadOfClass: aClass from:  e ]! !
 
-!SDMemoryStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:04'!
-storeObject: anObject 	super storeObject: anObject.	Instances 		at: anObject id		put: anObject sandstoneDeepCopy sandstoneMarkReferences! !
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:58'!
+removeObject: anObject 
+	super removeObject: anObject.
+	Instances removeKey: anObject id ifAbsent: []! !
 
-!SDMemoryStore methodsFor: 'actions' stamp: 'rjl 8/15/2008 01:33'!
-updateObject: anObject	self storeObject: anObject! !
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:59'!
+storeObject: anObject 
+	super storeObject: anObject.
+	Instances 
+		at: anObject id
+		put: anObject sandstoneDeepCopy sandstoneMarkReferences! !
+
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:59'!
+updateObject: anObject
+	self storeObject: anObject! !
 
 !SDMemoryStore class methodsFor: 'initialization' stamp: 'RamonLeon 4/22/2011 09:03'!
 initialize	"self initialize"	Instances := Dictionary new	! !
