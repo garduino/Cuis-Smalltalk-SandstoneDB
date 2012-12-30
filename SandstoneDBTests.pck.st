@@ -1,4 +1,4 @@
-'From Cuis 4.1 of 12 December 2012 [latest update: #1511] on 16 December 2012 at 7:49:41 pm'!
+'From Cuis 4.1 of 12 December 2012 [latest update: #1524] on 30 December 2012 at 6:49:02 pm'!
 'Description Please enter a description for this package '!
 !classDefinition: #SDActiveRecordTests category: #SandstoneDbTests!
 TestCase subclass: #SDActiveRecordTests
