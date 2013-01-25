@@ -8,14 +8,19 @@ Ported from: http://onsmalltalk.com/sandstonedb-simple-activerecord-style-persis
 CAUTION: This is a first commit, is still a work in progress with some failing tests.
 
 
-To install in a Cuis 4 #1308 image:
+To install in a Cuis 4.1 image evaluate the next script:
 
-1. From GitHub repository Cuis-Pharo14CompatibilityLayer, install:
-    - Cuis-Pharo14CLayer.pck
-    - Cuis-Network-UUID.pck
-    - Cuis-NetworkTests-UUID.pck (Optional, only if you want to run the Network-UUID tests)
-
-2. From this GitHug repo (Cuis-SandstoneDB) install:
-    - SandstoneDB.pck
-    - SandstoneDBTests.pck (Optional, only if you want to run the SandstoneDB tests)
+    | slash  |
+    slash := FileDirectory slash.
+    {
+    '..', slash, 'Cuis-Pharo14CompatibilityLayer', slash, 'CuisSandstoneDB-Pharo14CLayer.pck.st' .
+    '..', slash, 'Cuis-Pharo14CompatibilityLayer', slash, 'Cuis-Network-UUID.pck.st' .
+    '..', slash, 'Cuis-Pharo14CompatibilityLayer', slash, 'Cuis-NetworkTests-UUID.pck.st' .
+    '..', slash, 'Cuis-SandstoneDB', slash, 'SandstoneDB.pck.st' .
+    '..', slash, 'Cuis-SandstoneDB', slash, 'SandstoneDBTests.pck.st' .
+    }
+    do:
+    [ :fileName | CodePackageFile installPackageStream:
+    (FileStream concreteStream readOnlyFileNamed: fileName)
+    ].
 
