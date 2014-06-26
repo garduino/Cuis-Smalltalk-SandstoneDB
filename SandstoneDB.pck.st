@@ -1,55 +1,9 @@
-'From Cuis 4.1 of 12 December 2012 [latest update: #1524] on 30 December 2012 at 6:48:47 pm'!
+'From Cuis 4.2 of 25 July 2013 [latest update: #2021] on 26 June 2014 at 7:54:40.007349 pm'!
 'Description Please enter a description for this package '!
-!classDefinition: #SDAbstractStore category: #'SandstoneDb-Core'!
-Object subclass: #SDAbstractStore
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDb-Core'!
-!classDefinition: 'SDAbstractStore class' category: #'SandstoneDb-Core'!
-SDAbstractStore class
-	instanceVariableNames: ''!
-
-!classDefinition: #SDActiveRecord category: #'SandstoneDb-Core'!
-Object subclass: #SDActiveRecord
-	instanceVariableNames: 'id createdOn updatedOn version isNew'
-	classVariableNames: 'Store'
-	poolDictionaries: ''
-	category: 'SandstoneDb-Core'!
-!classDefinition: 'SDActiveRecord class' category: #'SandstoneDb-Core'!
-SDActiveRecord class
-	instanceVariableNames: 'lock'!
-
-!classDefinition: #SDCachedStore category: #'SandstoneDb-Core'!
-SDAbstractStore subclass: #SDCachedStore
-	instanceVariableNames: 'cache'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDb-Core'!
-!classDefinition: 'SDCachedStore class' category: #'SandstoneDb-Core'!
-SDCachedStore class
-	instanceVariableNames: ''!
-
-!classDefinition: #SDCheckPointer category: #'SandstoneDb-Core'!
-Object subclass: #SDCheckPointer
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDb-Core'!
-!classDefinition: 'SDCheckPointer class' category: #'SandstoneDb-Core'!
-SDCheckPointer class
-	instanceVariableNames: ''!
-
-!classDefinition: #SDConcurrentDictionary category: #'SandstoneDb-Core'!
-Object subclass: #SDConcurrentDictionary
-	instanceVariableNames: 'lock dictionary'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDb-Core'!
-!classDefinition: 'SDConcurrentDictionary class' category: #'SandstoneDb-Core'!
-SDConcurrentDictionary class
-	instanceVariableNames: ''!
-
+!provides: 'SandstoneDB' 1 1!
+!requires: 'CuisSandstoneDB-Pharo14CLayer' 1 0 nil!
+!requires: 'Cuis-Network-UUID' 1 0 nil!
+!requires: 'Cuis-NetworkTests-UUID' 1 0 nil!
 !classDefinition: #SDError category: #'SandstoneDb-Core'!
 Error subclass: #SDError
 	instanceVariableNames: ''
@@ -70,16 +24,6 @@ SDError subclass: #SDCommitError
 SDCommitError class
 	instanceVariableNames: ''!
 
-!classDefinition: #SDFileStore category: #'SandstoneDb-Store'!
-SDCachedStore subclass: #SDFileStore
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDb-Store'!
-!classDefinition: 'SDFileStore class' category: #'SandstoneDb-Store'!
-SDFileStore class
-	instanceVariableNames: 'serializer'!
-
 !classDefinition: #SDLoadError category: #'SandstoneDb-Core'!
 SDError subclass: #SDLoadError
 	instanceVariableNames: ''
@@ -90,6 +34,36 @@ SDError subclass: #SDLoadError
 SDLoadError class
 	instanceVariableNames: ''!
 
+!classDefinition: #SDAbstractStore category: #'SandstoneDb-Core'!
+Object subclass: #SDAbstractStore
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDb-Core'!
+!classDefinition: 'SDAbstractStore class' category: #'SandstoneDb-Core'!
+SDAbstractStore class
+	instanceVariableNames: ''!
+
+!classDefinition: #SDCachedStore category: #'SandstoneDb-Core'!
+SDAbstractStore subclass: #SDCachedStore
+	instanceVariableNames: 'cache'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDb-Core'!
+!classDefinition: 'SDCachedStore class' category: #'SandstoneDb-Core'!
+SDCachedStore class
+	instanceVariableNames: ''!
+
+!classDefinition: #SDFileStore category: #'SandstoneDb-Store'!
+SDCachedStore subclass: #SDFileStore
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDb-Store'!
+!classDefinition: 'SDFileStore class' category: #'SandstoneDb-Store'!
+SDFileStore class
+	instanceVariableNames: 'serializer'!
+
 !classDefinition: #SDMemoryStore category: #'SandstoneDb-Store'!
 SDCachedStore subclass: #SDMemoryStore
 	instanceVariableNames: ''
@@ -98,6 +72,36 @@ SDCachedStore subclass: #SDMemoryStore
 	category: 'SandstoneDb-Store'!
 !classDefinition: 'SDMemoryStore class' category: #'SandstoneDb-Store'!
 SDMemoryStore class
+	instanceVariableNames: ''!
+
+!classDefinition: #SDActiveRecord category: #'SandstoneDb-Core'!
+Object subclass: #SDActiveRecord
+	instanceVariableNames: 'id createdOn updatedOn version isNew'
+	classVariableNames: 'Store'
+	poolDictionaries: ''
+	category: 'SandstoneDb-Core'!
+!classDefinition: 'SDActiveRecord class' category: #'SandstoneDb-Core'!
+SDActiveRecord class
+	instanceVariableNames: 'lock'!
+
+!classDefinition: #SDCheckPointer category: #'SandstoneDb-Core'!
+Object subclass: #SDCheckPointer
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDb-Core'!
+!classDefinition: 'SDCheckPointer class' category: #'SandstoneDb-Core'!
+SDCheckPointer class
+	instanceVariableNames: ''!
+
+!classDefinition: #SDConcurrentDictionary category: #'SandstoneDb-Core'!
+Object subclass: #SDConcurrentDictionary
+	instanceVariableNames: 'lock dictionary'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDb-Core'!
+!classDefinition: 'SDConcurrentDictionary class' category: #'SandstoneDb-Core'!
+SDConcurrentDictionary class
 	instanceVariableNames: ''!
 
 !classDefinition: #SDRecordMarker category: #'SandstoneDb-Core'!
@@ -131,8 +135,23 @@ SDSmartRefStreamSerializer class
 	instanceVariableNames: ''!
 
 
+!SDError commentStamp: 'rjl 4/10/2008 21:36' prior: 0!
+I'm just an abstract error!
+
+!SDCommitError commentStamp: 'rjl 4/10/2008 21:33' prior: 0!
+Clearly, I'm thrown on a commit failure, duh!!'!
+
+!SDLoadError commentStamp: 'rjl 4/10/2008 20:24' prior: 0!
+I'm thrown when an object fails to load from disk, either because the file was corrupt or because it was deleted.!
+
 !SDAbstractStore commentStamp: 'rjl 8/10/2008 11:41' prior: 0!
 I'm an abstract store to define what's necessary to plug in a new method of storing active records.  When records are stored, they are already sliced out of the graph and have markers for any other references placed in them.  The store can serialize however it sees fit, but when loading, before returning the version from the store, it should resolve the references.'!
+
+!SDFileStore commentStamp: 'rjl 8/10/2008 11:42' prior: 0!
+I'm a store for persisting active records directly to disk via a SmartReference stream with a few extentions to make it non interactive.'!
+
+!SDMemoryStore commentStamp: 'rjl 8/10/2008 11:43' prior: 0!
+I'm a store for persisting active records directly to a dictionary to show what a minimal implementation of a store must to do pass the unit tests.!
 
 !SDActiveRecord commentStamp: '<historical>' prior: 0!
 I'm the core of a simple object database based upon a mix of several patterns intended for use with *small* Seaside based web applications.  I am not meant to scale to millions of records, just tens of thousands, but for prototyping and small office applications where the number of records are in the thousands and the number of concurrent users can be handled by a single Squeak image.  To use me, simply subclass me and restart your image that's it.  
@@ -143,198 +162,11 @@ For more information see http://onsmalltalk.com/programming/smalltalk/sandstoned
 !SDCheckPointer commentStamp: 'rjl 8/5/2008 09:17' prior: 0!
 I run as a background process to ensure the database is loaded and periodically save the image when enough active records are found to be newer than the image.  This is essentially just like flushing the contents of a transaction log to the main database file.!
 
-!SDCommitError commentStamp: 'rjl 4/10/2008 21:33' prior: 0!
-Clearly, I'm thrown on a commit failure, duh!!'!
-
 !SDConcurrentDictionary commentStamp: 'rjl 5/9/2008 20:58' prior: 0!
 A SDConcurrentDictionary is just a dictionary wrapper so I can wrap a critical around mutating methods I need in ActiveRecord!
 
-!SDError commentStamp: 'rjl 4/10/2008 21:36' prior: 0!
-I'm just an abstract error!
-
-!SDFileStore commentStamp: 'rjl 8/10/2008 11:42' prior: 0!
-I'm a store for persisting active records directly to disk via a SmartReference stream with a few extentions to make it non interactive.'!
-
-!SDLoadError commentStamp: 'rjl 4/10/2008 20:24' prior: 0!
-I'm thrown when an object fails to load from disk, either because the file was corrupt or because it was deleted.!
-
-!SDMemoryStore commentStamp: 'rjl 8/10/2008 11:43' prior: 0!
-I'm a store for persisting active records directly to a dictionary to show what a minimal implementation of a store must to do pass the unit tests.!
-
 !SDRecordMarker commentStamp: 'rjl 4/10/2008 21:32' prior: 0!
 I exist to mark a reference to another object in the serialized file, I'm replaced by a real object when I'm deserialized.  I'm basically a manually invoked proxy being used because getting a real proxy that inherits from ProtoObject to serialize seemed hurculean.!
-
-!ArrayedCollection methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 6/29/2011 20:50'!
-sandstoneDeepCopyVisits: visitedParts 
-	"sandstoneDeepCopy works just like deepCopy until it hits another active record
-	at which point the copying stops, and the actual references is returned."
-	| newObject |
-	visitedParts at: self ifPresent: [ :it | ^ it ].
-	newObject := self copy.
-	visitedParts at: self put: newObject.
-	"optimized implementation taking advantaged of ordering"
-	newObject doWithIndex: 
-		[ :each :index | 
-		each isSandstoneActiveRecord ifFalse: 
-			[ newObject 
-				at: index
-				put: (each sandstoneDeepCopyVisits: visitedParts) ] ].
-	^ newObject! !
-
-!ArrayedCollection methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 5/6/2011 13:30'!
-sandstoneMarkReferencesVisits: visitedParts 
-	"Mark components of the introspectee which are 
-	Sandstone active records to become references.
-	Do this deeply (sub components)."
-	self class isMeta ifTrue: [ ^ self ].
-	visitedParts at: self ifPresent: [:it | ^ self ].
-	visitedParts at: self put: self.
-	self doWithIndex: 
-		[ :each :index | 
-		each isSandstoneActiveRecord 
-			ifTrue: [ self at: index put: each asReferenceMarker ]
-			ifFalse: [ each sandstoneMarkReferencesVisits: visitedParts ] ].
-	^ self! !
-
-!ArrayedCollection methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 5/6/2011 13:49'!
-sandstoneResolveReferencesVisits: visitedParts 
-	"Make components of the introspectee which are 
-	Sandstone references to active record to become active records.
-	Do this deeply (sub components)."
-	self class isMeta ifTrue: [ ^ self ].
-	visitedParts at: self ifPresent: [ :it | ^ it ].
-	visitedParts at: self put: self.
-	"It is crucial to modify the introspectee by iterating a copy of it"
-	self copy doWithIndex: 
-		[ :each :index | 
-		each isSandstoneMarker 
-			ifTrue: [ self at: index put: each asOriginalObject ]
-			ifFalse: [ each sandstoneResolveReferencesVisits: visitedParts ] ].
-	^ self! !
-
-!Boolean methodsFor: '*sandstonedb' stamp: 'rjl 5/12/2008 22:33'!
-sandstoneDeepCopyVisits: visitedParts
-	^ self! !
-
-!Boolean methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:36'!
-sandstoneMarkReferencesVisits: visitedParts
-	^ self! !
-
-!Boolean methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:55'!
-sandstoneResolveReferencesVisits: visitedParts 
-	^ self! !
-
-!Character methodsFor: '*sandstonedb' stamp: 'rjl 5/12/2008 22:34'!
-sandstoneDeepCopyVisits: visitedParts
-	^ self! !
-
-!Character methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:36'!
-sandstoneMarkReferencesVisits: visitedParts
-	^ self! !
-
-!Character methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:55'!
-sandstoneResolveReferencesVisits: visitedParts 
-	^ self! !
-
-!Class methodsFor: '*SandstoneDb' stamp: 'RamonLeon 3/31/2011 21:36'!
-sandstoneDeepCopyVisits: aCollection 
-	SDCommitError signal: 'An ActiveRecord can not reference a class or another object that references a class. '! !
-
-!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:56'!
-fileNamed: aName do: aBlock 
-	| file |
-	file := self fileNamed: aName.
-	^ file 
-		ifNil: [ nil ]
-		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
-
-!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:57'!
-newFileNamed: aName do: aBlock 
-	| file |
-	file := self newFileNamed: aName.
-	^ file 
-		ifNil: [ nil ]
-		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
-
-!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:57'!
-oldFileNamed: aName do: aBlock 
-	| file |
-	file := self oldFileNamed: aName.
-	^ file 
-		ifNil: [ nil ]
-		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
-
-!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/12/2008 16:51'!
-readOnlyFileNamed: aString
-	| strm |
-	strm := self on: (FileStream readOnlyFileNamed: aString).
-	strm byteStream setFileTypeToObject.
-	^ strm! !
-
-!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:56'!
-readOnlyFileNamed: aName do: aBlock 
-	| file |
-	file := self readOnlyFileNamed: aName.
-	^ file 
-		ifNil: [ nil ]
-		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
-
-!Dictionary methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 14:20'!
-sandstoneResolveReferencesVisits: visitedParts
-	super sandstoneResolveReferencesVisits: visitedParts.
-	self rehash.
-	^ self! !
-
-!FileDirectory methodsFor: '*sandstonedb' stamp: 'gsa 11/22/2012 14:25'!
-sandstoneRename: oldFileName toBe: newFileName
-	| oldName newName |
-	"a non interactive version of rename that won't promp the UI on failure"
-	oldName := self fullNameFor: oldFileName.
-	newName := self fullNameFor: newFileName.
-	(StandardFileStream 
-		retryWithGC:["self primRename: oldName asVmPathName to: newName asVmPathName" self primRename: oldName to: newName]
-		until:[:result| result notNil]
-		forFileNamed: oldName) ~~ nil ifTrue:[^self].
-	(self fileExists: oldFileName) ifFalse:[
-		^self error:'Attempt to rename a non-existent file'.
-	].
-	^self error:'Failed to rename file'.! !
-
-!FileDirectory methodsFor: '*sandstonedb' stamp: 'rjl 8/5/2008 22:48'!
-withSubdirectoriesDo: aBlock 
-	self directoryNames do: [ :n | aBlock value: (self directoryNamed: n) ]! !
-
-!InstructionStream methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 9/9/2011 14:40'!
-sandstoneDeepCopyVisits: visitedParts 
-	SDCommitError signal: 'An ActiveRecord can not reference any sub instances of instruction stream.  Make sure you are not saving blocks. '! !
-
-!Integer methodsFor: '*sandstonedb' stamp: 'rjl 4/10/2008 10:08'!
-asReducedSumOfDigits
-	"Answers the sum of the digits present in the 
-	decimal representation of the receiver 
-	but also repeating the procedure if the 
-	answers is greater than 9."
-	^ 10 <= self 
-		ifFalse: [ self ]
-		ifTrue: 
-			[ self = 10 
-				ifTrue: [ 0 ]
-				ifFalse: 
-					[ (self asString 
-						inject: 0
-						into: [ :sum :e | sum + e digitValue ]) asReducedSumOfDigits ] ]! !
-
-!Number methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:46'!
-sandstoneDeepCopyVisits: visitedParts
-	^ self! !
-
-!Number methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:37'!
-sandstoneMarkReferencesVisits: visitedParts
-	^ self! !
-
-!Number methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:44'!
-sandstoneResolveReferencesVisits: visitedParts 
-	^ self! !
 
 !Object methodsFor: '*sandstonedb-testing' stamp: 'sas 4/9/2008 13:20'!
 isSandstoneActiveRecord
@@ -416,6 +248,242 @@ sandstoneResolveReferencesVisits: visitedParts
 			ifFalse: [ var sandstoneResolveReferencesVisits: visitedParts ] ].
 	^ self! !
 
+!Class methodsFor: '*SandstoneDb' stamp: 'RamonLeon 3/31/2011 21:36'!
+sandstoneDeepCopyVisits: aCollection 
+	SDCommitError signal: 'An ActiveRecord can not reference a class or another object that references a class. '! !
+
+!Boolean methodsFor: '*sandstonedb' stamp: 'rjl 5/12/2008 22:33'!
+sandstoneDeepCopyVisits: visitedParts
+	^ self! !
+
+!Boolean methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:36'!
+sandstoneMarkReferencesVisits: visitedParts
+	^ self! !
+
+!Boolean methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:55'!
+sandstoneResolveReferencesVisits: visitedParts 
+	^ self! !
+
+!ArrayedCollection methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 6/29/2011 20:50'!
+sandstoneDeepCopyVisits: visitedParts 
+	"sandstoneDeepCopy works just like deepCopy until it hits another active record
+	at which point the copying stops, and the actual references is returned."
+	| newObject |
+	visitedParts at: self ifPresent: [ :it | ^ it ].
+	newObject := self copy.
+	visitedParts at: self put: newObject.
+	"optimized implementation taking advantaged of ordering"
+	newObject doWithIndex: 
+		[ :each :index | 
+		each isSandstoneActiveRecord ifFalse: 
+			[ newObject 
+				at: index
+				put: (each sandstoneDeepCopyVisits: visitedParts) ] ].
+	^ newObject! !
+
+!ArrayedCollection methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 5/6/2011 13:30'!
+sandstoneMarkReferencesVisits: visitedParts 
+	"Mark components of the introspectee which are 
+	Sandstone active records to become references.
+	Do this deeply (sub components)."
+	self class isMeta ifTrue: [ ^ self ].
+	visitedParts at: self ifPresent: [:it | ^ self ].
+	visitedParts at: self put: self.
+	self doWithIndex: 
+		[ :each :index | 
+		each isSandstoneActiveRecord 
+			ifTrue: [ self at: index put: each asReferenceMarker ]
+			ifFalse: [ each sandstoneMarkReferencesVisits: visitedParts ] ].
+	^ self! !
+
+!ArrayedCollection methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 5/6/2011 13:49'!
+sandstoneResolveReferencesVisits: visitedParts 
+	"Make components of the introspectee which are 
+	Sandstone references to active record to become active records.
+	Do this deeply (sub components)."
+	self class isMeta ifTrue: [ ^ self ].
+	visitedParts at: self ifPresent: [ :it | ^ it ].
+	visitedParts at: self put: self.
+	"It is crucial to modify the introspectee by iterating a copy of it"
+	self copy doWithIndex: 
+		[ :each :index | 
+		each isSandstoneMarker 
+			ifTrue: [ self at: index put: each asOriginalObject ]
+			ifFalse: [ each sandstoneResolveReferencesVisits: visitedParts ] ].
+	^ self! !
+
+!String methodsFor: '*sandstonedb-serialization' stamp: 'rjl 5/12/2008 22:36'!
+sandstoneDeepCopyVisits: visitedParts
+	^ self shallowCopy! !
+
+!String methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 5/6/2011 13:37'!
+sandstoneMarkReferencesVisits: visitedParts
+	^ self! !
+
+!String methodsFor: '*sandstonedb-serialization' stamp: 'rjl 8/3/2008 00:21'!
+sandstoneResolveReferencesVisits: visitedParts 
+	^ self! !
+
+!Semaphore methodsFor: '*SandstoneDb' stamp: 'RamonLeon 3/31/2011 21:36'!
+sandstoneDeepCopyVisits: aCollection 
+	SDCommitError signal: 'An ActiveRecord can not reference a semaphore or another object that references a semaphor. '! !
+
+!Set methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 14:20'!
+sandstoneResolveReferencesVisits: visitedParts
+	super sandstoneResolveReferencesVisits: visitedParts.
+	self rehash.
+	^ self! !
+
+!Dictionary methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 14:20'!
+sandstoneResolveReferencesVisits: visitedParts
+	super sandstoneResolveReferencesVisits: visitedParts.
+	self rehash.
+	^ self! !
+
+!FileDirectory methodsFor: '*sandstonedb' stamp: 'gsa 11/22/2012 14:25'!
+sandstoneRename: oldFileName toBe: newFileName
+	| oldName newName |
+	"a non interactive version of rename that won't promp the UI on failure"
+	oldName := self fullNameFor: oldFileName.
+	newName := self fullNameFor: newFileName.
+	(StandardFileStream 
+		retryWithGC:["self primRename: oldName asVmPathName to: newName asVmPathName" self primRename: oldName to: newName]
+		until:[:result| result notNil]
+		forFileNamed: oldName) ~~ nil ifTrue:[^self].
+	(self fileExists: oldFileName) ifFalse:[
+		^self error:'Attempt to rename a non-existent file'.
+	].
+	^self error:'Failed to rename file'.! !
+
+!FileDirectory methodsFor: '*sandstonedb' stamp: 'rjl 8/5/2008 22:48'!
+withSubdirectoriesDo: aBlock 
+	self directoryNames do: [ :n | aBlock value: (self directoryNamed: n) ]! !
+
+!InstructionStream methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 9/9/2011 14:40'!
+sandstoneDeepCopyVisits: visitedParts 
+	SDCommitError signal: 'An ActiveRecord can not reference any sub instances of instruction stream.  Make sure you are not saving blocks. '! !
+
+!Character methodsFor: '*sandstonedb' stamp: 'rjl 5/12/2008 22:34'!
+sandstoneDeepCopyVisits: visitedParts
+	^ self! !
+
+!Character methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:36'!
+sandstoneMarkReferencesVisits: visitedParts
+	^ self! !
+
+!Character methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:55'!
+sandstoneResolveReferencesVisits: visitedParts 
+	^ self! !
+
+!Number methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:46'!
+sandstoneDeepCopyVisits: visitedParts
+	^ self! !
+
+!Number methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:37'!
+sandstoneMarkReferencesVisits: visitedParts
+	^ self! !
+
+!Number methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:44'!
+sandstoneResolveReferencesVisits: visitedParts 
+	^ self! !
+
+!Integer methodsFor: '*sandstonedb' stamp: 'rjl 4/10/2008 10:08'!
+asReducedSumOfDigits
+	"Answers the sum of the digits present in the 
+	decimal representation of the receiver 
+	but also repeating the procedure if the 
+	answers is greater than 9."
+	^ 10 <= self 
+		ifFalse: [ self ]
+		ifTrue: 
+			[ self = 10 
+				ifTrue: [ 0 ]
+				ifFalse: 
+					[ (self asString 
+						inject: 0
+						into: [ :sum :e | sum + e digitValue ]) asReducedSumOfDigits ] ]! !
+
+!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:56'!
+fileNamed: aName do: aBlock 
+	| file |
+	file := self fileNamed: aName.
+	^ file 
+		ifNil: [ nil ]
+		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
+
+!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:57'!
+newFileNamed: aName do: aBlock 
+	| file |
+	file := self newFileNamed: aName.
+	^ file 
+		ifNil: [ nil ]
+		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
+
+!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:57'!
+oldFileNamed: aName do: aBlock 
+	| file |
+	file := self oldFileNamed: aName.
+	^ file 
+		ifNil: [ nil ]
+		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
+
+!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/12/2008 16:51'!
+readOnlyFileNamed: aString
+	| strm |
+	strm := self on: (FileStream readOnlyFileNamed: aString).
+	strm byteStream setFileTypeToObject.
+	^ strm! !
+
+!DataStream class methodsFor: '*sandstonedb' stamp: 'rjl 1/14/2008 08:56'!
+readOnlyFileNamed: aName do: aBlock 
+	| file |
+	file := self readOnlyFileNamed: aName.
+	^ file 
+		ifNil: [ nil ]
+		ifNotNil: [ [ aBlock value: file ] ensure: [ file close ] ]! !
+
+!SmartRefStream methodsFor: '*sandstonedb' stamp: 'rjl 8/12/2008 08:11'!
+sandstoneNextAndClose
+	"Speedy way to grab one object. Only use when we are inside an object
+	binary file.I created my own version of nextAndClose to get rid of the 
+	interactive stuff the real one tries to do.  If I fail, then I fail, so be it"
+	| obj |
+	byteStream peek = ReferenceStream versionCode ifFalse: [ SDLoadError signal: 'old object file' ].
+	obj := self next.
+	self close.
+	^ obj! !
+
+!SmartRefStream methodsFor: '*sandstonedb' stamp: 'RamonLeon 3/15/2011 15:17'!
+sandstoneNextPutObjOnly: anObject 
+	"Really write three objects: (version, class structure, object).  But only when called from the outside.  Not in fileOut format.  No class definitions will be written for instance-specific classes.  Error if find one.  (Use nextPut: instead)"
+	| info |
+	topCall 
+		ifNil: 
+			[ topCall := anObject.
+			super nextPut: ReferenceStream versionCode.
+			info := self instVarInfo: anObject.
+			objCount := 0.
+			super nextPut: info.
+			super nextPut: anObject.	"<- the real writing"
+			"Class inst vars not written here!!"
+			topCall := nil
+			"references is an IDict of every object that got written
+			(in case you want to take statistics)"
+			"Transcript cr; show: structures keys printString."	"debug"	"reset it" ]
+		ifNotNil: [ super nextPut: anObject ]! !
+
+!UndefinedObject methodsFor: '*sandstonedb' stamp: 'rjl 5/12/2008 22:37'!
+sandstoneDeepCopyVisits: visitedParts
+	^ self! !
+
+!UndefinedObject methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:37'!
+sandstoneMarkReferencesVisits: visitedParts
+	^ self! !
+
+!UndefinedObject methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:53'!
+sandstoneResolveReferencesVisits: visitedParts 
+	^ self! !
+
 !SDAbstractStore methodsFor: 'actions' stamp: 'rjl 8/14/2008 16:48'!
 abortChanges: anObject
 	self subclassResponsibility! !
@@ -494,6 +562,337 @@ install
 	[ SDActiveRecord
 		setStore: self new;
 		warmUpAllClasses ] forkAt: Processor userBackgroundPriority named: 'loading new store'! !
+
+!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:09'!
+abortChanges: anObject 
+	| diskVersion |
+	anObject critical: 
+		[ self 
+			removeCachedOfClass: anObject class
+			from: anObject id.
+		diskVersion := self 
+			cachedLoadOfClass: anObject class
+			from: anObject id.
+		diskVersion 
+			ifNil: 
+				[ self 
+					addCachedOfClass: anObject class
+					at: anObject id
+					put: anObject ]
+			ifNotNil: [ anObject becomeForward: diskVersion ] ]! !
+
+!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/21/2011 23:01'!
+addCachedOfClass: aClass at: anId put: anObject
+	(cache at: aClass) at: anId put: anObject! !
+
+!SDCachedStore methodsFor: 'queries' stamp: 'gsa 11/22/2012 14:29'!
+cachedLoadOfClass: aClass from: anId
+	^ (cache at: aClass)
+		at: anId
+		ifAbsent: [ 
+			(self loadClass: aClass atId: anId)
+				" gsa ifNotNilDo:" ifNotNil: [ :it | 
+					"seems I have to make sure to cache the object before I can resolve 
+				it's references so any backreferences to it don't try and load from 
+				disk again''"
+					(cache at: aClass) at: anId put: it.
+					it sandstoneResolveReferences ] ]! !
+
+!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:06'!
+ensureForClass: aClass
+	cache 
+		at: aClass 
+		ifAbsentPut: [ SDConcurrentDictionary on: (Dictionary new: self defaultCacheSize) ]! !
+
+!SDCachedStore methodsFor: 'delegated queries' stamp: 'RamonLeon 4/21/2011 23:44'!
+familyForClass: aClass 
+	^ aClass allSubclasses 
+		inject: (cache at: aClass) 
+		into: [ :sum :subclass | sum , (cache at: subclass)  ]! !
+
+!SDCachedStore methodsFor: 'delegated queries' stamp: 'rjl 5/23/2009 17:47'!
+forClass: aClass 
+	^ (self familyForClass: aClass) ! !
+
+!SDCachedStore methodsFor: 'actions' stamp: 'gsa 11/22/2012 14:31'!
+forClass: aClass at: anId ifAbsent: aHandler
+	aClass withAllSubclasses
+		do: [ :class | ((cache at: class) at: anId ifAbsent: [ nil ]) 
+			"gsa ifNotNilDo:" ifNotNil: [ :result | ^ result ] ].
+	^ aHandler value! !
+
+!SDCachedStore methodsFor: 'delegated queries' stamp: 'gsa 11/22/2012 14:33'!
+forClass: aClass detect: aBlock ifFound: aHandler
+	aClass withAllSubclasses
+		do: [ :class | 
+			((cache at: class) detect: aBlock ifNone: [ nil ])
+				"gsa ifNotNilDo:" ifNotNil: [ :found | 
+					aHandler value: found.
+					^ found ] ].
+	^ nil! !
+
+!SDCachedStore methodsFor: 'delegated queries' stamp: 'gsa 11/22/2012 14:35'!
+forClass: aClass detect: aBlock ifNone: aHandler 
+	aClass withAllSubclasses
+		do: [ :class | 
+			((cache at: class) detect: aBlock ifNone: [ nil ])
+				"gsa ifNotNilDo:" ifNotNil: [ :found | ^ found ] ].
+	^ aHandler value! !
+
+!SDCachedStore methodsFor: 'delegated queries' stamp: 'RamonLeon 4/21/2011 23:59'!
+forClass: aClass do: aBlock
+	aClass withAllSubclasses do: [ :class | (cache at: class) do: aBlock ]! !
+
+!SDCachedStore methodsFor: 'delegated queries' stamp: 'RamonLeon 4/22/2011 00:10'!
+forClass: aClass findAll: aBlock 
+	| result |
+	result := Dictionary new.
+	aClass withAllSubclasses do: [:class | 
+		result addAll: ((cache at: class) select: aBlock) ].
+	^ result! !
+
+!SDCachedStore methodsFor: 'initialize-release' stamp: 'RamonLeon 4/21/2011 22:58'!
+initialize
+	super initialize.
+	self initializeCache! !
+
+!SDCachedStore methodsFor: 'initialize-release' stamp: 'RamonLeon 4/22/2011 08:57'!
+initializeCache
+	cache := Dictionary new! !
+
+!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/21/2011 23:02'!
+removeCachedOfClass: aClass from: anId 
+	"calling delete multiple times shouldn't cause an error"
+	^ (cache at: aClass) removeKey: anId
+		ifAbsent: [ nil ]! !
+
+!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:08'!
+removeObject: anObject
+	self removeCachedOfClass: anObject class from: anObject id! !
+
+!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/21/2011 23:28'!
+storeObject: anObject 
+	self 
+		addCachedOfClass: anObject class
+		at: anObject id
+		put: anObject.! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'rjl 8/11/2008 19:20'!
+commit: aBlock
+	self shouldNotImplement! !
+
+!SDFileStore methodsFor: 'defaults' stamp: 'gsa 12/16/2012 18:59'!
+defaultBaseDirectory
+	"you can override this if you want to force the db somewhere else"
+	^ FileDirectory default directoryNamed: 
+		(FileDirectory baseNameFor: 
+			(FileDirectory localNameFor: 
+				Smalltalk imageName)) , '.SandstoneDb'! !
+
+!SDFileStore methodsFor: 'crash recovery' stamp: 'gsa 12/16/2012 18:59'!
+deleteFailedCommitsForClass: aClass 
+	"all remaining .new files are failed commits, kill them"
+	
+	[ (self dirForClass: aClass) fullNamesOfAllFilesInSubtree 
+		select: [ :each | each endsWith: '.new' ]
+		thenDo: [ :each | FileDirectory deleteFilePath: each ] ] 
+		on: Error
+		do: [ :err | Transcript show: err ]! !
+
+!SDFileStore methodsFor: 'queries' stamp: 'gsa 11/24/2012 15:02'!
+dirForClass: aClass 
+	"compute the path of superclasses all the way up to ActiveRecord, storing 
+	subclass records as a subdirectory of the superclasses directory 
+	allows ActiveRecord to deal with inheritance"
+	| parentClass lineage |
+	aClass == SDActiveRecord ifTrue: 
+		[ Error signal: 'ActiveRecord itself is abstract, you must only  
+ store subclasses' ].
+	lineage := OrderedCollection with: aClass.
+	parentClass := aClass superclass.
+	[ parentClass == SDActiveRecord ] whileFalse: 
+		[ lineage addFirst: parentClass.
+		parentClass := parentClass superclass ].
+	^ lineage 
+		inject: self defaultBaseDirectory
+		into: [ :dir :each | dir directoryNamed: each name ]! !
+
+!SDFileStore methodsFor: 'queries' stamp: 'gsa 11/24/2012 15:02'!
+dirForClass: aClass atId: anId 
+	"Grab the correct hashed subdirectory for this record"
+	^ (self dirForClass: aClass) directoryNamed: (self dirNameFor: anId)! !
+
+!SDFileStore methodsFor: 'queries' stamp: 'rjl 8/10/2008 00:17'!
+dirNameFor: anId 
+	"Answers a string with one decimal digit corresponding to anId.  There is a bug
+	in this that does not ever hash to the directory 1, but because of existing datasets
+	this must remain, do not want to rehash my databases and it is no big deal"
+	self flag: #knownBug.
+	^ (anId inject: 0 into: [ : sum : e | sum + e asInteger ]) asReducedSumOfDigits asString! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:57'!
+ensureDown
+	self initializeCache ! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:07'!
+ensureForClass: aClass 
+	| dir |
+	super ensureForClass: aClass.
+	dir := (self dirForClass: aClass) assureExistence.
+	0 
+		to: 9
+		do: [ :num | (dir directoryNamed: num asString) assureExistence ].
+! !
+
+!SDFileStore methodsFor: 'queries' stamp: 'rjl 8/14/2008 20:44'!
+familyForClass: aClass 
+	"I'm returing raw cache dictionary here because this read only copy
+	doesn't need concurrency protection, just a naked dictionary''"
+	^ aClass allSubclasses 
+		inject: (cache at: aClass) dictionary
+		into: [ :sum :subclass | sum , (cache at: subclass) dictionary ]! !
+
+!SDFileStore methodsFor: 'crash recovery' stamp: 'gsa 11/22/2012 07:40'!
+finishPartialCommitsForClass: aClass 
+	"find where .new exists but .obj doesn't, rename .obj.new to
+	.obj to finish commit'"
+	
+	[ (self dirForClass: aClass) fullNamesOfAllFilesInSubtree 
+		select: [ :each | each endsWith: '.obj.new' ]
+		thenDo: 
+			[ :each | 
+			| objFile dir |
+			objFile := FileDirectory localNameFor: (each 
+					copyReplaceAll: '.new'
+					with: '').
+			dir := FileDirectory forFileName: each.
+			(dir fileExists: objFile) ifFalse: 
+				[ dir 
+					rename: (FileDirectory localNameFor: each)
+					toBe: objFile ] ] ] 
+		on: Error
+		do: 
+			[ :err | 
+			Transcript
+				newLine; show: err.]! !
+
+!SDFileStore methodsFor: 'crash recovery' stamp: 'gsa 11/22/2012 10:06'!
+loadChangesForClass: aClass 
+	| id obj |
+	(self dirForClass: aClass) withSubdirectoriesDo: [ :dir | 
+		[ dir entries do: 
+			[ :each | 
+			"there could be tens of thousands of entries, so using do with 
+			a condition to avoid the copy a select would generate"
+			each isDirectory ifFalse: 
+				[ id := each name copyUpTo: $..
+				obj := (cache at: aClass) at: id ifAbsent: [ nil ].
+				obj 
+					ifNil: [ self cachedLoadOfClass: aClass from:  id ]
+					ifNotNil: [ obj abortChanges ] ] ] ]
+			on: Error
+			do: [ :err | Transcript 	newLine; show: err.] ]! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 10/9/2012 09:15'!
+loadClass: aClass atId: anId
+	[ 
+	| obj name |
+	name := (self dirForClass: aClass atId: anId) fullNameFor: anId , '.obj'.
+	obj := self class serializer materializeFromFile: name.
+	^ obj
+		onLoad;
+		yourself ] on: Error do: [ :err | SDLoadError signal: 'Loading id=' , anId , '. ' , err messageText ]! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'rjl 8/10/2008 01:24'!
+recoverForClass: aClass 
+	self
+		finishPartialCommitsForClass: aClass;
+		deleteFailedCommitsForClass: aClass;
+		loadChangesForClass: aClass! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:08'!
+removeObject: anObject
+	| dir |
+	super removeObject: anObject.
+	dir := self dirForClass: anObject class atId: anObject id.	
+	"kill all versions or failed commits of this object"
+	dir
+		deleteFileNamed: anObject id , '.obj';
+		deleteFileNamed: anObject id , '.new';
+		deleteFileNamed: anObject id , '.old'! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 5/31/2011 10:14'!
+storeObject: origObject
+	"The basic idea here is to make a save as atomic as possible and no data 
+	is corrupted, no partial writes, thus renaming files as atomic."
+
+	| currentVersion newVersion oldVersion dir anObject |
+	super storeObject: origObject.
+	anObject := origObject sandstoneDeepCopy sandstoneMarkReferences.
+	dir := self dirForClass: anObject class atId: anObject id.
+	currentVersion := dir fullNameFor: anObject id , '.obj'.
+	newVersion := currentVersion , '.new'.
+	oldVersion := currentVersion , '.old'.	"just in case a previous commit failed and left junk around"
+	dir deleteFileNamed: newVersion.	"the flush ensures all data is actually written to disk before moving on"
+	self class serializer serialize: anObject toFile: newVersion.
+	dir deleteFileNamed: oldVersion.	"the pre-commit, on first save there won't be a current version, and fileExists is 
+	too expensive to check when it'll always be there except on first save"
+	[ dir sandstoneRename: currentVersion toBe: oldVersion ]
+		ifError: [ 
+			"just ignore it"
+			 ].	"now the actual commit"
+	dir sandstoneRename: newVersion toBe: currentVersion.	"clean up the junk (could fail if OS has lock on it for some reason)"
+	dir deleteFileNamed: oldVersion! !
+
+!SDFileStore methodsFor: 'actions' stamp: 'rjl 8/15/2008 01:32'!
+updateObject: anObject
+	self storeObject: anObject! !
+
+!SDFileStore class methodsFor: 'accessing' stamp: 'RamonLeon 5/31/2011 10:03'!
+serializer
+	^ serializer ifNil: [ serializer := SDSmartRefStreamSerializer new ]! !
+
+!SDFileStore class methodsFor: 'accessing' stamp: 'RamonLeon 5/31/2011 10:03'!
+serializer: aSerializer
+	serializer := aSerializer! !
+
+!SDMemoryStore methodsFor: 'actions' stamp: 'rjl 8/11/2008 19:20'!
+commit: aBlock
+	self shouldNotImplement! !
+
+!SDMemoryStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:04'!
+loadClass: aClass atId: anId 
+	^ (Instances at: anId) sandstoneResolveReferences! !
+
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:58'!
+recoverForClass: aClass 
+	
+	"Instances keysDo: [:e | self cachedLoadOfClass: aClass from: e]"
+
+	(Instances associationsSelect: [ :a | a value class == aClass ]) 
+		keysDo: [ :e |  self cachedLoadOfClass: aClass from:  e ]! !
+
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:58'!
+removeObject: anObject 
+	super removeObject: anObject.
+	Instances removeKey: anObject id ifAbsent: []! !
+
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:59'!
+storeObject: anObject 
+	super storeObject: anObject.
+	Instances 
+		at: anObject id
+		put: anObject sandstoneDeepCopy sandstoneMarkReferences! !
+
+!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:59'!
+updateObject: anObject
+	self storeObject: anObject! !
+
+!SDMemoryStore class methodsFor: 'initialization' stamp: 'RamonLeon 4/22/2011 09:03'!
+initialize
+	"self initialize"
+	Instances := Dictionary new
+	! !
 
 !SDActiveRecord methodsFor: 'comparing' stamp: 'RamonLeon 4/22/2011 19:31'!
 = anObject 
@@ -810,120 +1209,6 @@ warmUpAllClasses
 		allSubclassesDo: [ :each | self store ensureForClass: each ];
 		allSubclassesDo: [ :each | each warmUp ]! !
 
-!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:09'!
-abortChanges: anObject 
-	| diskVersion |
-	anObject critical: 
-		[ self 
-			removeCachedOfClass: anObject class
-			from: anObject id.
-		diskVersion := self 
-			cachedLoadOfClass: anObject class
-			from: anObject id.
-		diskVersion 
-			ifNil: 
-				[ self 
-					addCachedOfClass: anObject class
-					at: anObject id
-					put: anObject ]
-			ifNotNil: [ anObject becomeForward: diskVersion ] ]! !
-
-!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/21/2011 23:01'!
-addCachedOfClass: aClass at: anId put: anObject
-	(cache at: aClass) at: anId put: anObject! !
-
-!SDCachedStore methodsFor: 'queries' stamp: 'gsa 11/22/2012 14:29'!
-cachedLoadOfClass: aClass from: anId
-	^ (cache at: aClass)
-		at: anId
-		ifAbsent: [ 
-			(self loadClass: aClass atId: anId)
-				" gsa ifNotNilDo:" ifNotNil: [ :it | 
-					"seems I have to make sure to cache the object before I can resolve 
-				it's references so any backreferences to it don't try and load from 
-				disk again''"
-					(cache at: aClass) at: anId put: it.
-					it sandstoneResolveReferences ] ]! !
-
-!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:06'!
-ensureForClass: aClass
-	cache 
-		at: aClass 
-		ifAbsentPut: [ SDConcurrentDictionary on: (Dictionary new: self defaultCacheSize) ]! !
-
-!SDCachedStore methodsFor: 'delegated queries' stamp: 'RamonLeon 4/21/2011 23:44'!
-familyForClass: aClass 
-	^ aClass allSubclasses 
-		inject: (cache at: aClass) 
-		into: [ :sum :subclass | sum , (cache at: subclass)  ]! !
-
-!SDCachedStore methodsFor: 'delegated queries' stamp: 'rjl 5/23/2009 17:47'!
-forClass: aClass 
-	^ (self familyForClass: aClass) ! !
-
-!SDCachedStore methodsFor: 'actions' stamp: 'gsa 11/22/2012 14:31'!
-forClass: aClass at: anId ifAbsent: aHandler
-	aClass withAllSubclasses
-		do: [ :class | ((cache at: class) at: anId ifAbsent: [ nil ]) 
-			"gsa ifNotNilDo:" ifNotNil: [ :result | ^ result ] ].
-	^ aHandler value! !
-
-!SDCachedStore methodsFor: 'delegated queries' stamp: 'gsa 11/22/2012 14:33'!
-forClass: aClass detect: aBlock ifFound: aHandler
-	aClass withAllSubclasses
-		do: [ :class | 
-			((cache at: class) detect: aBlock ifNone: [ nil ])
-				"gsa ifNotNilDo:" ifNotNil: [ :found | 
-					aHandler value: found.
-					^ found ] ].
-	^ nil! !
-
-!SDCachedStore methodsFor: 'delegated queries' stamp: 'gsa 11/22/2012 14:35'!
-forClass: aClass detect: aBlock ifNone: aHandler 
-	aClass withAllSubclasses
-		do: [ :class | 
-			((cache at: class) detect: aBlock ifNone: [ nil ])
-				"gsa ifNotNilDo:" ifNotNil: [ :found | ^ found ] ].
-	^ aHandler value! !
-
-!SDCachedStore methodsFor: 'delegated queries' stamp: 'RamonLeon 4/21/2011 23:59'!
-forClass: aClass do: aBlock
-	aClass withAllSubclasses do: [ :class | (cache at: class) do: aBlock ]! !
-
-!SDCachedStore methodsFor: 'delegated queries' stamp: 'RamonLeon 4/22/2011 00:10'!
-forClass: aClass findAll: aBlock 
-	| result |
-	result := Dictionary new.
-	aClass withAllSubclasses do: [:class | 
-		result addAll: ((cache at: class) select: aBlock) ].
-	^ result! !
-
-!SDCachedStore methodsFor: 'initialize-release' stamp: 'RamonLeon 4/21/2011 22:58'!
-initialize
-	super initialize.
-	self initializeCache! !
-
-!SDCachedStore methodsFor: 'initialize-release' stamp: 'RamonLeon 4/22/2011 08:57'!
-initializeCache
-	cache := Dictionary new! !
-
-!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/21/2011 23:02'!
-removeCachedOfClass: aClass from: anId 
-	"calling delete multiple times shouldn't cause an error"
-	^ (cache at: aClass) removeKey: anId
-		ifAbsent: [ nil ]! !
-
-!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:08'!
-removeObject: anObject
-	self removeCachedOfClass: anObject class from: anObject id! !
-
-!SDCachedStore methodsFor: 'actions' stamp: 'RamonLeon 4/21/2011 23:28'!
-storeObject: anObject 
-	self 
-		addCachedOfClass: anObject class
-		at: anObject id
-		put: anObject.! !
-
 !SDCheckPointer class methodsFor: 'initialization' stamp: 'rjl 8/5/2008 19:55'!
 initialize
 	"SDCheckPointer will act as the single agent to ensure all active record 
@@ -1060,223 +1345,6 @@ on: aDictionary
 		dictionary: aDictionary;
 		yourself! !
 
-!SDFileStore methodsFor: 'actions' stamp: 'rjl 8/11/2008 19:20'!
-commit: aBlock
-	self shouldNotImplement! !
-
-!SDFileStore methodsFor: 'defaults' stamp: 'gsa 12/16/2012 18:59'!
-defaultBaseDirectory
-	"you can override this if you want to force the db somewhere else"
-	^ FileDirectory default directoryNamed: 
-		(FileDirectory baseNameFor: 
-			(FileDirectory localNameFor: 
-				Smalltalk imageName)) , '.SandstoneDb'! !
-
-!SDFileStore methodsFor: 'crash recovery' stamp: 'gsa 12/16/2012 18:59'!
-deleteFailedCommitsForClass: aClass 
-	"all remaining .new files are failed commits, kill them"
-	
-	[ (self dirForClass: aClass) fullNamesOfAllFilesInSubtree 
-		select: [ :each | each endsWith: '.new' ]
-		thenDo: [ :each | FileDirectory deleteFilePath: each ] ] 
-		on: Error
-		do: [ :err | Transcript show: err ]! !
-
-!SDFileStore methodsFor: 'queries' stamp: 'gsa 11/24/2012 15:02'!
-dirForClass: aClass 
-	"compute the path of superclasses all the way up to ActiveRecord, storing 
-	subclass records as a subdirectory of the superclasses directory 
-	allows ActiveRecord to deal with inheritance"
-	| parentClass lineage |
-	aClass == SDActiveRecord ifTrue: 
-		[ Error signal: 'ActiveRecord itself is abstract, you must only  
- store subclasses' ].
-	lineage := OrderedCollection with: aClass.
-	parentClass := aClass superclass.
-	[ parentClass == SDActiveRecord ] whileFalse: 
-		[ lineage addFirst: parentClass.
-		parentClass := parentClass superclass ].
-	^ lineage 
-		inject: self defaultBaseDirectory
-		into: [ :dir :each | dir directoryNamed: each name ]! !
-
-!SDFileStore methodsFor: 'queries' stamp: 'gsa 11/24/2012 15:02'!
-dirForClass: aClass atId: anId 
-	"Grab the correct hashed subdirectory for this record"
-	^ (self dirForClass: aClass) directoryNamed: (self dirNameFor: anId)! !
-
-!SDFileStore methodsFor: 'queries' stamp: 'rjl 8/10/2008 00:17'!
-dirNameFor: anId 
-	"Answers a string with one decimal digit corresponding to anId.  There is a bug
-	in this that does not ever hash to the directory 1, but because of existing datasets
-	this must remain, do not want to rehash my databases and it is no big deal"
-	self flag: #knownBug.
-	^ (anId inject: 0 into: [ : sum : e | sum + e asInteger ]) asReducedSumOfDigits asString! !
-
-!SDFileStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:57'!
-ensureDown
-	self initializeCache ! !
-
-!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:07'!
-ensureForClass: aClass 
-	| dir |
-	super ensureForClass: aClass.
-	dir := (self dirForClass: aClass) assureExistence.
-	0 
-		to: 9
-		do: [ :num | (dir directoryNamed: num asString) assureExistence ].
-! !
-
-!SDFileStore methodsFor: 'queries' stamp: 'rjl 8/14/2008 20:44'!
-familyForClass: aClass 
-	"I'm returing raw cache dictionary here because this read only copy
-	doesn't need concurrency protection, just a naked dictionary''"
-	^ aClass allSubclasses 
-		inject: (cache at: aClass) dictionary
-		into: [ :sum :subclass | sum , (cache at: subclass) dictionary ]! !
-
-!SDFileStore methodsFor: 'crash recovery' stamp: 'gsa 11/22/2012 07:40'!
-finishPartialCommitsForClass: aClass 
-	"find where .new exists but .obj doesn't, rename .obj.new to
-	.obj to finish commit'"
-	
-	[ (self dirForClass: aClass) fullNamesOfAllFilesInSubtree 
-		select: [ :each | each endsWith: '.obj.new' ]
-		thenDo: 
-			[ :each | 
-			| objFile dir |
-			objFile := FileDirectory localNameFor: (each 
-					copyReplaceAll: '.new'
-					with: '').
-			dir := FileDirectory forFileName: each.
-			(dir fileExists: objFile) ifFalse: 
-				[ dir 
-					rename: (FileDirectory localNameFor: each)
-					toBe: objFile ] ] ] 
-		on: Error
-		do: 
-			[ :err | 
-			Transcript
-				newLine; show: err.]! !
-
-!SDFileStore methodsFor: 'crash recovery' stamp: 'gsa 11/22/2012 10:06'!
-loadChangesForClass: aClass 
-	| id obj |
-	(self dirForClass: aClass) withSubdirectoriesDo: [ :dir | 
-		[ dir entries do: 
-			[ :each | 
-			"there could be tens of thousands of entries, so using do with 
-			a condition to avoid the copy a select would generate"
-			each isDirectory ifFalse: 
-				[ id := each name copyUpTo: $..
-				obj := (cache at: aClass) at: id ifAbsent: [ nil ].
-				obj 
-					ifNil: [ self cachedLoadOfClass: aClass from:  id ]
-					ifNotNil: [ obj abortChanges ] ] ] ]
-			on: Error
-			do: [ :err | Transcript 	newLine; show: err.] ]! !
-
-!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 10/9/2012 09:15'!
-loadClass: aClass atId: anId
-	[ 
-	| obj name |
-	name := (self dirForClass: aClass atId: anId) fullNameFor: anId , '.obj'.
-	obj := self class serializer materializeFromFile: name.
-	^ obj
-		onLoad;
-		yourself ] on: Error do: [ :err | SDLoadError signal: 'Loading id=' , anId , '. ' , err messageText ]! !
-
-!SDFileStore methodsFor: 'actions' stamp: 'rjl 8/10/2008 01:24'!
-recoverForClass: aClass 
-	self
-		finishPartialCommitsForClass: aClass;
-		deleteFailedCommitsForClass: aClass;
-		loadChangesForClass: aClass! !
-
-!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:08'!
-removeObject: anObject
-	| dir |
-	super removeObject: anObject.
-	dir := self dirForClass: anObject class atId: anObject id.	
-	"kill all versions or failed commits of this object"
-	dir
-		deleteFileNamed: anObject id , '.obj';
-		deleteFileNamed: anObject id , '.new';
-		deleteFileNamed: anObject id , '.old'! !
-
-!SDFileStore methodsFor: 'actions' stamp: 'RamonLeon 5/31/2011 10:14'!
-storeObject: origObject
-	"The basic idea here is to make a save as atomic as possible and no data 
-	is corrupted, no partial writes, thus renaming files as atomic."
-
-	| currentVersion newVersion oldVersion dir anObject |
-	super storeObject: origObject.
-	anObject := origObject sandstoneDeepCopy sandstoneMarkReferences.
-	dir := self dirForClass: anObject class atId: anObject id.
-	currentVersion := dir fullNameFor: anObject id , '.obj'.
-	newVersion := currentVersion , '.new'.
-	oldVersion := currentVersion , '.old'.	"just in case a previous commit failed and left junk around"
-	dir deleteFileNamed: newVersion.	"the flush ensures all data is actually written to disk before moving on"
-	self class serializer serialize: anObject toFile: newVersion.
-	dir deleteFileNamed: oldVersion.	"the pre-commit, on first save there won't be a current version, and fileExists is 
-	too expensive to check when it'll always be there except on first save"
-	[ dir sandstoneRename: currentVersion toBe: oldVersion ]
-		ifError: [ 
-			"just ignore it"
-			 ].	"now the actual commit"
-	dir sandstoneRename: newVersion toBe: currentVersion.	"clean up the junk (could fail if OS has lock on it for some reason)"
-	dir deleteFileNamed: oldVersion! !
-
-!SDFileStore methodsFor: 'actions' stamp: 'rjl 8/15/2008 01:32'!
-updateObject: anObject
-	self storeObject: anObject! !
-
-!SDFileStore class methodsFor: 'accessing' stamp: 'RamonLeon 5/31/2011 10:03'!
-serializer
-	^ serializer ifNil: [ serializer := SDSmartRefStreamSerializer new ]! !
-
-!SDFileStore class methodsFor: 'accessing' stamp: 'RamonLeon 5/31/2011 10:03'!
-serializer: aSerializer
-	serializer := aSerializer! !
-
-!SDMemoryStore methodsFor: 'actions' stamp: 'rjl 8/11/2008 19:20'!
-commit: aBlock
-	self shouldNotImplement! !
-
-!SDMemoryStore methodsFor: 'actions' stamp: 'RamonLeon 4/22/2011 09:04'!
-loadClass: aClass atId: anId 
-	^ (Instances at: anId) sandstoneResolveReferences! !
-
-!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:58'!
-recoverForClass: aClass 
-	
-	"Instances keysDo: [:e | self cachedLoadOfClass: aClass from: e]"
-
-	(Instances associationsSelect: [ :a | a value class == aClass ]) 
-		keysDo: [ :e |  self cachedLoadOfClass: aClass from:  e ]! !
-
-!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:58'!
-removeObject: anObject 
-	super removeObject: anObject.
-	Instances removeKey: anObject id ifAbsent: []! !
-
-!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:59'!
-storeObject: anObject 
-	super storeObject: anObject.
-	Instances 
-		at: anObject id
-		put: anObject sandstoneDeepCopy sandstoneMarkReferences! !
-
-!SDMemoryStore methodsFor: 'actions' stamp: 'gsa 12/16/2012 18:59'!
-updateObject: anObject
-	self storeObject: anObject! !
-
-!SDMemoryStore class methodsFor: 'initialization' stamp: 'RamonLeon 4/22/2011 09:03'!
-initialize
-	"self initialize"
-	Instances := Dictionary new
-	! !
-
 !SDRecordMarker methodsFor: 'converting' stamp: 'rjl 8/14/2008 16:23'!
 asOriginalObject
 	"this needs to call cachedLoadFrom not findById in order to allow cycles in 
@@ -1332,70 +1400,6 @@ serialize: anObject toFile: aFile
 			file
 				sandstoneNextPutObjOnly: anObject;
 				flush ]! !
-
-!Semaphore methodsFor: '*SandstoneDb' stamp: 'RamonLeon 3/31/2011 21:36'!
-sandstoneDeepCopyVisits: aCollection 
-	SDCommitError signal: 'An ActiveRecord can not reference a semaphore or another object that references a semaphor. '! !
-
-!Set methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 14:20'!
-sandstoneResolveReferencesVisits: visitedParts
-	super sandstoneResolveReferencesVisits: visitedParts.
-	self rehash.
-	^ self! !
-
-!SmartRefStream methodsFor: '*sandstonedb' stamp: 'rjl 8/12/2008 08:11'!
-sandstoneNextAndClose
-	"Speedy way to grab one object. Only use when we are inside an object
-	binary file.I created my own version of nextAndClose to get rid of the 
-	interactive stuff the real one tries to do.  If I fail, then I fail, so be it"
-	| obj |
-	byteStream peek = ReferenceStream versionCode ifFalse: [ SDLoadError signal: 'old object file' ].
-	obj := self next.
-	self close.
-	^ obj! !
-
-!SmartRefStream methodsFor: '*sandstonedb' stamp: 'RamonLeon 3/15/2011 15:17'!
-sandstoneNextPutObjOnly: anObject 
-	"Really write three objects: (version, class structure, object).  But only when called from the outside.  Not in fileOut format.  No class definitions will be written for instance-specific classes.  Error if find one.  (Use nextPut: instead)"
-	| info |
-	topCall 
-		ifNil: 
-			[ topCall := anObject.
-			super nextPut: ReferenceStream versionCode.
-			info := self instVarInfo: anObject.
-			objCount := 0.
-			super nextPut: info.
-			super nextPut: anObject.	"<- the real writing"
-			"Class inst vars not written here!!"
-			topCall := nil
-			"references is an IDict of every object that got written
-			(in case you want to take statistics)"
-			"Transcript cr; show: structures keys printString."	"debug"	"reset it" ]
-		ifNotNil: [ super nextPut: anObject ]! !
-
-!String methodsFor: '*sandstonedb-serialization' stamp: 'rjl 5/12/2008 22:36'!
-sandstoneDeepCopyVisits: visitedParts
-	^ self shallowCopy! !
-
-!String methodsFor: '*sandstonedb-serialization' stamp: 'RamonLeon 5/6/2011 13:37'!
-sandstoneMarkReferencesVisits: visitedParts
-	^ self! !
-
-!String methodsFor: '*sandstonedb-serialization' stamp: 'rjl 8/3/2008 00:21'!
-sandstoneResolveReferencesVisits: visitedParts 
-	^ self! !
-
-!UndefinedObject methodsFor: '*sandstonedb' stamp: 'rjl 5/12/2008 22:37'!
-sandstoneDeepCopyVisits: visitedParts
-	^ self! !
-
-!UndefinedObject methodsFor: '*sandstonedb' stamp: 'RamonLeon 5/6/2011 13:37'!
-sandstoneMarkReferencesVisits: visitedParts
-	^ self! !
-
-!UndefinedObject methodsFor: '*sandstonedb' stamp: 'rjl 8/3/2008 00:53'!
-sandstoneResolveReferencesVisits: visitedParts 
-	^ self! !
+SDMemoryStore initialize!
 SDActiveRecord initialize!
 SDCheckPointer initialize!
-SDMemoryStore initialize!

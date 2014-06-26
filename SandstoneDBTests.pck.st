@@ -1,25 +1,7 @@
-'From Cuis 4.1 of 12 December 2012 [latest update: #1524] on 30 December 2012 at 6:49:02 pm'!
+'From Cuis 4.2 of 25 July 2013 [latest update: #2021] on 26 June 2014 at 7:54:37.300748 pm'!
 'Description Please enter a description for this package '!
-!classDefinition: #SDActiveRecordTests category: #SandstoneDbTests!
-TestCase subclass: #SDActiveRecordTests
-	instanceVariableNames: 'mom kid store'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDbTests'!
-!classDefinition: 'SDActiveRecordTests class' category: #SandstoneDbTests!
-SDActiveRecordTests class
-	instanceVariableNames: ''!
-
-!classDefinition: #SDFileStoreTests category: #SandstoneDbTests!
-SDActiveRecordTests subclass: #SDFileStoreTests
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDbTests'!
-!classDefinition: 'SDFileStoreTests class' category: #SandstoneDbTests!
-SDFileStoreTests class
-	instanceVariableNames: ''!
-
+!provides: 'SandstoneDBTests' 1 1!
+!requires: 'SandstoneDB' 1 1 nil!
 !classDefinition: #SDFooObject category: #SandstoneDbTests!
 SDActiveRecord subclass: #SDFooObject
 	instanceVariableNames: 'dict'
@@ -28,16 +10,6 @@ SDActiveRecord subclass: #SDFooObject
 	category: 'SandstoneDbTests'!
 !classDefinition: 'SDFooObject class' category: #SandstoneDbTests!
 SDFooObject class
-	instanceVariableNames: ''!
-
-!classDefinition: #SDMemoryStoreTests category: #SandstoneDbTests!
-SDActiveRecordTests subclass: #SDMemoryStoreTests
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'SandstoneDbTests'!
-!classDefinition: 'SDMemoryStoreTests class' category: #SandstoneDbTests!
-SDMemoryStoreTests class
 	instanceVariableNames: ''!
 
 !classDefinition: #SDPersonMock category: #SandstoneDbTests!
@@ -90,9 +62,143 @@ SDChildMock subclass: #SDGrandChildMock
 SDGrandChildMock class
 	instanceVariableNames: ''!
 
+!classDefinition: #SDActiveRecordTests category: #SandstoneDbTests!
+TestCase subclass: #SDActiveRecordTests
+	instanceVariableNames: 'mom kid store'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDbTests'!
+!classDefinition: 'SDActiveRecordTests class' category: #SandstoneDbTests!
+SDActiveRecordTests class
+	instanceVariableNames: ''!
+
+!classDefinition: #SDFileStoreTests category: #SandstoneDbTests!
+SDActiveRecordTests subclass: #SDFileStoreTests
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDbTests'!
+!classDefinition: 'SDFileStoreTests class' category: #SandstoneDbTests!
+SDFileStoreTests class
+	instanceVariableNames: ''!
+
+!classDefinition: #SDMemoryStoreTests category: #SandstoneDbTests!
+SDActiveRecordTests subclass: #SDMemoryStoreTests
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'SandstoneDbTests'!
+!classDefinition: 'SDMemoryStoreTests class' category: #SandstoneDbTests!
+SDMemoryStoreTests class
+	instanceVariableNames: ''!
+
 
 !SDActiveRecordTests commentStamp: 'rjl 12/19/2007 20:41' prior: 0!
 Part of the reason I did this project was to force myself to learn to do more unit testing.  I'm starting to learn to like it.!
+
+!SDFooObject methodsFor: 'accessing' stamp: 'np 5/23/2009 18:42'!
+dict
+	^dict! !
+
+!SDFooObject methodsFor: 'accessing' stamp: 'np 5/23/2009 18:42'!
+dict: aDictionary
+	dict := aDictionary! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 3/10/2008 21:44'!
+buddy
+	^ buddy! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 3/10/2008 21:44'!
+buddy: anObject
+	buddy := anObject! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/11/2007 10:33'!
+children
+	^ children! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/11/2007 10:33'!
+children: anObject
+	children := anObject! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+dateOfBirth
+	^ dateOfBirth! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+dateOfBirth: anObject
+	dateOfBirth := anObject! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:08'!
+description
+	^ description! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+description: anObject
+	description := anObject! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+father
+	^ father! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+father: anObject
+	father := anObject! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+mother
+	^ mother! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+mother: anObject
+	mother := anObject! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+name
+	^ name! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
+name: anObject
+	name := anObject! !
+
+!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 4/22/2008 10:45'!
+refreshed
+	^ self class atId: id! !
+
+!SDPersonMock class methodsFor: 'as yet unclassified' stamp: 'rjl 4/1/2008 11:53'!
+testPerson
+	^ (self new)
+		name: 'mzqfmmv zptnhli';
+		dateOfBirth: Date today - 12000 atRandom days;
+		description: 'Rxvalpv tdpqkvv ikjcscw bigjmeb vukntxj qxshdtt wkczzio bqpqacu whluhqv.  Lqlwajh!!  Qknwpfd peeskqc oarthtv pfblwjj yndlxks.  .  Ucnlocq iuiiluk txkkzmh dshkhmq uokcwqy oiktkxl awxmpep rkkcmis xcgyoeg jodtjaf ntwijzp?  Bqpjsiq qthzwtx xcnqbag ausurqp xatoqar jytguon?  Bpigdij jgijxep bjgttpr kklsfaw rdoikwz!!  Hzdbjxc?  Ehwflyy qfcqntk mlhcjql ecbtrtk egxldpk rypalvw ndngbdl jhhdxts zrfjtaz gccrnni dwuqxwm nmifzcq sxkgkxh.  Kwtzsjv ghvjqqm lfgibdt rufcowp kavabmi bpveqsr shjzsft xqaxivy fjqydns ryyggif.
+
+Jshooyy jsyojlv miusnaj onpdiss hypkzzd qaunpqd rrvgnws ekiswyv?  Glhxkkk?  Pzyjuot raaefbv cnxmbsd?  Jabaniw uirjkcm jocxnhd!!  Erwblox qikxfez.
+
+Ezswaga cnrzhqi jrdikos kkcncxd eoewflm ylzilve viumpqm uiyqhvv azrezhc jjeesfd rfdgsgg wfmxfye iisisju vhjourb.
+
+Yicqnqd zhaioos npnjjsc hxfwlfr ozynyjs!!  Qavvubu uodeedp?  Fjdgbxu ryswazg ifumqpv jtlifnd?  Blciucl kypalot?  Dstnwqj kwzpxrk bgewcyp triddbr acvrkey pwgcleb sqtxajv svzpnwk unnlmtg oqnbpsq svtnxdo!!
+
+Ywodawk uikhwek kyqivqj iojkwiw.  Bjcsnpu jtfpmqd!!  Crwlngk qeeeuci nnakbai hncfdkk kbhehju ttdsdcf zqulfpj pmvtmfa xrusxuy wbamfee opzjdia hcrfdnz tiasrqz wkwidbg?  Tzlwcst twaeuwm tfhreal igamlby saekozk tjnxohl ogcdhva fckbaii utqvhjg?  Nrynpjl dniycpm kkvytuu bnuxrev zrvbcph.  Awfbhgg xtyffnz lwjkhdo evmvogt vqfqppp chdtxcr ktiwujg vcgqoya thgkhac ncagoxy unuukan gntyowz obmiwmf!!  Okwjujz tfghbxi jupstni xbzpgau zlxeblm!!  Llxuwqc gupeurb ltwyzzj xxanyln qgrtigr?
+
+Vudeenm hnfwxay rtaacau ymmyxbi lpcbamg ifopjuw guhctxx radytrh yubjcjc lnjucta qinzmlf.  Cnunlvp gdhcgrq oxeojsd?  Bbkjtne kzlvdso xtmgqhj pfyroxl brmqhkt gvqnftz aupxtsg.
+
+Krzxaye!!  Clhbjoq ubxtlsc jzhggvl updbzxe.
+
+Vhtetst ruwpukn jdttpba?  Ctwactb ljoeiqa pubapwc cioporv?
+
+Talkecn dbddhuw rxfybrf iwdxfdo spdbdyk vhxbgrm elqngon dytngbm knqxaqv zrltvgh snjkzig rzypaly ekabqcg.  Xxxmegt otxzkhh vxpyjkn pnhgpfx qsnrhjo ziftvuu ivvfacz nhdajef ezksurr gvfepxx.  Lqdldbo wegkzlk qxgqpux hfbtydd hbqfhea gxuksjm hvunuwa?  Lxqkddp bccukhy odljtnp nouapus dcqpkqz lgpxpcs fmaehsc cgybese gujcbqz icjzamy tvmvwlf dvtkpng!!  !!  Okqxkhh dfuulea?  Ratgmpz?  Pfmgfbk qhggllc.  Balobww?
+
+Wqoyfli xlxenvi ngtdshb bhpmyhd.  Kxsidry wijdkem oyuutvw msunbhq vaektbt yfapmwl yjrwmxi xgzfpbk hxcmydy jgaybjh magjtcf.  Koxatqi ivvultq yptadcp ygqutkn dizybis nvsvfhx tdhcqfy ihvqsvs paakztf uzokxhk xlcfhbr wejdutf wywzrqs tnlswyo?  Glawqav nvndvdf cbqzhce iuygwer twyxquv pjklwnv tbnazjw vuvxvgi?
+
+Rpyaiqq rnvfyzk fgbsbjc zhftunh uvmxaov vgvwzwq fpuurxc!!  Zemojud eadzsas wzfdcuv vxvulbc ahtiijq yclzbvf rspxhrc lymmwja!!  Mfmgrrb!!  Cyfuuvp iabqntx volbiij ebjihqw ypxvukv wnghvwo fhqwyuh tlmeyrl oxcmotx uemizkc xvbgzqh xsdqtcj xfbzrgg?  Jmtauxu!!  Kbigzux slwjszd manystg usxbiya kfgdygh wrclmih chqtyew orkrazt pekdcrh oexrivu bnbrerh?
+
+Xbkcyvl xivutzr iitbwnm eouuiux iwaansa oxzygwa sosqxvi jkinurb bedwzss?  Uspwzru.  Eogmjki raowczb!!  ?  Lfzhatu ldnvhfn rzfqfcl yzhbxpo evahsye eibcwlx ygknqms terepdi acvezip lyqydat bksesji.  Sncraae sropzde xdhuuuf?  ?
+
+Vtcevnw dqwwzqe kqmakan wboltvp axuhsio eddpqvk hmaqsst kbqyeqg qjnlkph zjrrcdr glyqfak!!  Ciofqeq qzfzdxn aumczcs yxzdrqu hxnlhmo ihnowav nqggjoi dfdxzqr.
+
+Wiedtvt jpikavx hkxvzqi eyobbcb hxhktut qpgasux bnwnzhp xaceikr comlnmg jkdzrhn hctccgm zcjgqbc llklclt!!
+
+Bgyypck fvgaauj bzetcjo rqixcnx ggwuzax cnknyiv vbtnkxj zkmenql ynxyqpp vqnvihq qydzixk jvsbxhw qnbphdl uddayfe!!  Glalnun gbtcspy kxnzokz ecdpgpr kcmvcdf ngczhkp oovhcik yvlzbgl?';
+		yourself! !
 
 !SDActiveRecordTests methodsFor: 'factory' stamp: 'gsa 11/23/2012 17:22'!
 childClass
@@ -725,14 +831,6 @@ testStorageDir
 isAbstract
 	^ false! !
 
-!SDFooObject methodsFor: 'accessing' stamp: 'np 5/23/2009 18:42'!
-dict
-	^dict! !
-
-!SDFooObject methodsFor: 'accessing' stamp: 'np 5/23/2009 18:42'!
-dict: aDictionary
-	dict := aDictionary! !
-
 !SDMemoryStoreTests methodsFor: 'defaults' stamp: 'rjl 8/10/2008 11:07'!
 defaultStore
 	^ SDMemoryStore new! !
@@ -747,99 +845,3 @@ testWarmUpInitializesCorrectDictionaries
 !SDMemoryStoreTests class methodsFor: 'testing' stamp: 'rjl 8/10/2008 11:06'!
 isAbstract
 	^ false! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 3/10/2008 21:44'!
-buddy
-	^ buddy! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 3/10/2008 21:44'!
-buddy: anObject
-	buddy := anObject! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/11/2007 10:33'!
-children
-	^ children! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/11/2007 10:33'!
-children: anObject
-	children := anObject! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-dateOfBirth
-	^ dateOfBirth! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-dateOfBirth: anObject
-	dateOfBirth := anObject! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:08'!
-description
-	^ description! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-description: anObject
-	description := anObject! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-father
-	^ father! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-father: anObject
-	father := anObject! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-mother
-	^ mother! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-mother: anObject
-	mother := anObject! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-name
-	^ name! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 12/7/2007 17:07'!
-name: anObject
-	name := anObject! !
-
-!SDPersonMock methodsFor: 'accessing' stamp: 'rjl 4/22/2008 10:45'!
-refreshed
-	^ self class atId: id! !
-
-!SDPersonMock class methodsFor: 'as yet unclassified' stamp: 'rjl 4/1/2008 11:53'!
-testPerson
-	^ (self new)
-		name: 'mzqfmmv zptnhli';
-		dateOfBirth: Date today - 12000 atRandom days;
-		description: 'Rxvalpv tdpqkvv ikjcscw bigjmeb vukntxj qxshdtt wkczzio bqpqacu whluhqv.  Lqlwajh!!  Qknwpfd peeskqc oarthtv pfblwjj yndlxks.  .  Ucnlocq iuiiluk txkkzmh dshkhmq uokcwqy oiktkxl awxmpep rkkcmis xcgyoeg jodtjaf ntwijzp?  Bqpjsiq qthzwtx xcnqbag ausurqp xatoqar jytguon?  Bpigdij jgijxep bjgttpr kklsfaw rdoikwz!!  Hzdbjxc?  Ehwflyy qfcqntk mlhcjql ecbtrtk egxldpk rypalvw ndngbdl jhhdxts zrfjtaz gccrnni dwuqxwm nmifzcq sxkgkxh.  Kwtzsjv ghvjqqm lfgibdt rufcowp kavabmi bpveqsr shjzsft xqaxivy fjqydns ryyggif.
-
-Jshooyy jsyojlv miusnaj onpdiss hypkzzd qaunpqd rrvgnws ekiswyv?  Glhxkkk?  Pzyjuot raaefbv cnxmbsd?  Jabaniw uirjkcm jocxnhd!!  Erwblox qikxfez.
-
-Ezswaga cnrzhqi jrdikos kkcncxd eoewflm ylzilve viumpqm uiyqhvv azrezhc jjeesfd rfdgsgg wfmxfye iisisju vhjourb.
-
-Yicqnqd zhaioos npnjjsc hxfwlfr ozynyjs!!  Qavvubu uodeedp?  Fjdgbxu ryswazg ifumqpv jtlifnd?  Blciucl kypalot?  Dstnwqj kwzpxrk bgewcyp triddbr acvrkey pwgcleb sqtxajv svzpnwk unnlmtg oqnbpsq svtnxdo!!
-
-Ywodawk uikhwek kyqivqj iojkwiw.  Bjcsnpu jtfpmqd!!  Crwlngk qeeeuci nnakbai hncfdkk kbhehju ttdsdcf zqulfpj pmvtmfa xrusxuy wbamfee opzjdia hcrfdnz tiasrqz wkwidbg?  Tzlwcst twaeuwm tfhreal igamlby saekozk tjnxohl ogcdhva fckbaii utqvhjg?  Nrynpjl dniycpm kkvytuu bnuxrev zrvbcph.  Awfbhgg xtyffnz lwjkhdo evmvogt vqfqppp chdtxcr ktiwujg vcgqoya thgkhac ncagoxy unuukan gntyowz obmiwmf!!  Okwjujz tfghbxi jupstni xbzpgau zlxeblm!!  Llxuwqc gupeurb ltwyzzj xxanyln qgrtigr?
-
-Vudeenm hnfwxay rtaacau ymmyxbi lpcbamg ifopjuw guhctxx radytrh yubjcjc lnjucta qinzmlf.  Cnunlvp gdhcgrq oxeojsd?  Bbkjtne kzlvdso xtmgqhj pfyroxl brmqhkt gvqnftz aupxtsg.
-
-Krzxaye!!  Clhbjoq ubxtlsc jzhggvl updbzxe.
-
-Vhtetst ruwpukn jdttpba?  Ctwactb ljoeiqa pubapwc cioporv?
-
-Talkecn dbddhuw rxfybrf iwdxfdo spdbdyk vhxbgrm elqngon dytngbm knqxaqv zrltvgh snjkzig rzypaly ekabqcg.  Xxxmegt otxzkhh vxpyjkn pnhgpfx qsnrhjo ziftvuu ivvfacz nhdajef ezksurr gvfepxx.  Lqdldbo wegkzlk qxgqpux hfbtydd hbqfhea gxuksjm hvunuwa?  Lxqkddp bccukhy odljtnp nouapus dcqpkqz lgpxpcs fmaehsc cgybese gujcbqz icjzamy tvmvwlf dvtkpng!!  !!  Okqxkhh dfuulea?  Ratgmpz?  Pfmgfbk qhggllc.  Balobww?
-
-Wqoyfli xlxenvi ngtdshb bhpmyhd.  Kxsidry wijdkem oyuutvw msunbhq vaektbt yfapmwl yjrwmxi xgzfpbk hxcmydy jgaybjh magjtcf.  Koxatqi ivvultq yptadcp ygqutkn dizybis nvsvfhx tdhcqfy ihvqsvs paakztf uzokxhk xlcfhbr wejdutf wywzrqs tnlswyo?  Glawqav nvndvdf cbqzhce iuygwer twyxquv pjklwnv tbnazjw vuvxvgi?
-
-Rpyaiqq rnvfyzk fgbsbjc zhftunh uvmxaov vgvwzwq fpuurxc!!  Zemojud eadzsas wzfdcuv vxvulbc ahtiijq yclzbvf rspxhrc lymmwja!!  Mfmgrrb!!  Cyfuuvp iabqntx volbiij ebjihqw ypxvukv wnghvwo fhqwyuh tlmeyrl oxcmotx uemizkc xvbgzqh xsdqtcj xfbzrgg?  Jmtauxu!!  Kbigzux slwjszd manystg usxbiya kfgdygh wrclmih chqtyew orkrazt pekdcrh oexrivu bnbrerh?
-
-Xbkcyvl xivutzr iitbwnm eouuiux iwaansa oxzygwa sosqxvi jkinurb bedwzss?  Uspwzru.  Eogmjki raowczb!!  ?  Lfzhatu ldnvhfn rzfqfcl yzhbxpo evahsye eibcwlx ygknqms terepdi acvezip lyqydat bksesji.  Sncraae sropzde xdhuuuf?  ?
-
-Vtcevnw dqwwzqe kqmakan wboltvp axuhsio eddpqvk hmaqsst kbqyeqg qjnlkph zjrrcdr glyqfak!!  Ciofqeq qzfzdxn aumczcs yxzdrqu hxnlhmo ihnowav nqggjoi dfdxzqr.
-
-Wiedtvt jpikavx hkxvzqi eyobbcb hxhktut qpgasux bnwnzhp xaceikr comlnmg jkdzrhn hctccgm zcjgqbc llklclt!!
-
-Bgyypck fvgaauj bzetcjo rqixcnx ggwuzax cnknyiv vbtnkxj zkmenql ynxyqpp vqnvihq qydzixk jvsbxhw qnbphdl uddayfe!!  Glalnun gbtcspy kxnzokz ecdpgpr kcmvcdf ngczhkp oovhcik yvlzbgl?';
-		yourself! !
